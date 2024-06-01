@@ -99,9 +99,11 @@ const page = () => {
           />
         </div>
         <div className={`flex flex-col items-center gap-[16px] lg:items-start`}>
-          <h1 className={`${poppins.className} text-center text-sub font-semibold md:text-h3 lg:text-left lg:text-h2`}>
+          <h1
+            className={`${poppins.className} text-center text-[22px] font-semibold px-[10px] md:text-h3 lg:text-left lg:text-h2`}
+          >
             Join the Markitplace <br /> Find <span className={`text-accent1`}>anything</span> and{' '}
-            <span className={`text-accent1`}>everything</span>.
+            <span className={`text-accent1`}>everything</span>
             <br /> Buy.Sell.Enagage
           </h1>
           <a
@@ -186,7 +188,7 @@ const page = () => {
             <div className={`flex flex-col items-center gap-[16px]`}>
               <h1 className={`text-h3 font-semibold`}>Create an account</h1>
               <p className={`w-[250px] text-center  text-[20px]`}>
-                Create an account to verify you&apos;re not a bot and to viewthe markitplace
+                Create an account to verify you&apos;re not a bot and to view the markitplace
               </p>
             </div>
           </div>
