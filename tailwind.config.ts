@@ -22,6 +22,7 @@ const config = {
       secondary: '#2ECC71',
       neutral: '#F5F5F5',
       accent1: '#F1C40F',
+      accent2: '#E74C3C',
       dark: '#424242',
     },
     container: {
@@ -75,12 +76,30 @@ const config = {
             'background-image': 'linear-gradient(to bottom right, rgba(23, 25, 28, 0.8), rgba(0, 0, 0, 0.8))',
           },
         },
+        'diagonal-green-wave': {
+          '0%': {
+            'background-size': '200% 200%',
+            'background-position': 'top left',
+            'background-image': 'linear-gradient(to bottom right, rgba(46, 204, 113, 0.8), rgba(32, 178, 170, 0.8))',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'bottom right',
+            'background-image': 'linear-gradient(to bottom right, rgba(32, 178, 170, 0.8), rgba(46, 204, 113, 0.8))',
+          },
+          '100%': {
+            'background-size': '200% 200%',
+            'background-position': 'top left',
+            'background-image': 'linear-gradient(to bottom right, rgba(46, 204, 113, 0.8), rgba(32, 178, 170, 0.8))',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'green-dream': 'green-dream 8s ease infinite',
         'gray-fluff': 'gray-fluff 8s ease infinite',
+        'diagonal-green-wave': 'diagonal-green-wave 8s ease-in-out infinite',
       },
     },
   },
