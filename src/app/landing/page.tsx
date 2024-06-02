@@ -6,6 +6,7 @@ import { Guitar, Concert, Shoes } from '../../../public/assets/images/img_export
 import { Delivery, Secure, Search, Completion } from '../../../public/assets/svgs/svg_exports';
 import Image from 'next/image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { FlipWords } from '@/components/ui/flip-words';
 
 const page = () => {
   return (
@@ -102,8 +103,7 @@ const page = () => {
           <h1
             className={`${poppins.className} text-center text-[22px] font-semibold px-[10px] md:text-h3 lg:text-left lg:text-h2`}
           >
-            Join the Markitplace <br /> Find <span className={`text-accent1`}>anything</span> and{' '}
-            <span className={`text-accent1`}>everything</span>
+            Join the Markitplace <br /> Find <FlipWords duration={1500} words={['anything', 'everything']} />
             <br /> Buy.Sell.Enagage
           </h1>
           <a
