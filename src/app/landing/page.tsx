@@ -103,8 +103,8 @@ const page = () => {
           <h1
             className={`${poppins.className} text-center text-[22px] font-semibold px-[10px] md:text-h3 lg:text-left lg:text-h2`}
           >
-            Join the Markitplace <br /> Find <FlipWords duration={1500} words={['anything', 'everything']} />
-            <br /> Buy.Sell.Enagage
+            Join the Markitplace. <br /> Where you can find <br />
+            <FlipWords duration={1500} words={['anything', 'everything']} />
           </h1>
           <a
             href='/signup'
