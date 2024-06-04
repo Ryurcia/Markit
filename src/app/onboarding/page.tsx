@@ -5,6 +5,7 @@ import { hind, poppins } from '@/utils/font.config';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { setupUserProfile } from '@/lib/supabase/user/userFunctions';
+import { useRouter } from 'next/navigation';
 
 const OnboardingSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -24,6 +25,8 @@ const OnboardingSchema = Yup.object().shape({
 const page = () => {
   const [onBoardingError, setOnboardingError] = useState('');
 
+  const router = useRouter();
+
   return (
     <div className={`h-dvh flex flex-col justify-center`}>
       <Formik
@@ -38,7 +41,7 @@ const page = () => {
 
           if (error) return setOnboardingError(error.profileError);
 
-          return;
+          return router.replace('/home');
         }}
       >
         {({ errors, touched }) => (

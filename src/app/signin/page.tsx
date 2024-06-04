@@ -4,16 +4,12 @@ import Link from 'next/link';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { hind, poppins } from '@/utils/font.config';
 import * as Yup from 'yup';
-import { SignUpNewUser } from '@/lib/supabase/auth/authFunctions';
+import { SignInUser } from '@/lib/supabase/auth/authFunctions';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const SignupSchema = Yup.object().shape({
+const SigninSchema = Yup.object().shape({
   email: Yup.string().email('*Invalid email').required('*Email Required'),
-  password: Yup.string()
-    .min(8, '*Password is too short!')
-    .max(20, '*Password is too long!')
-    .required('*Password is required'),
 });
 
 const page = () => {
@@ -26,13 +22,13 @@ const page = () => {
           email: '',
           password: '',
         }}
-        validationSchema={SignupSchema}
+        validationSchema={SigninSchema}
         onSubmit={async (values) => {
-          const res = await SignUpNewUser(values);
+          const res = await SignInUser(values);
 
           if (res?.authErrorMessage) return setAuthError(res.authErrorMessage);
 
-          router.replace('/onboarding');
+          router.replace('/home');
 
           return router.refresh();
         }}
@@ -41,10 +37,8 @@ const page = () => {
           <Form>
             <Card className='mx-auto max-w-[400px] animate-diagonal-green-wave rounded border-0'>
               <CardHeader>
-                <CardTitle className={`${poppins.className} text-h3`}>Sign Up</CardTitle>
-                <CardDescription className={`${poppins.className} text-sm`}>
-                  Please fill in the following info to get started
-                </CardDescription>
+                <CardTitle className={`${poppins.className} text-h3`}>Sign in</CardTitle>
+                <CardDescription className={`${poppins.className} text-sm`}>Welcome Back!</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className='grid gap-4'>
@@ -66,16 +60,15 @@ const page = () => {
                     <Field name='password' className={`text-dark border-0 w-full p-[8px]`} type='password' />
                   </div>
                   <ErrorMessage name='email' render={(msg) => <div className={`text-accent2 text-sm`}>{msg}</div>} />
-                  <ErrorMessage name='password' render={(msg) => <div className={`text-accent2 text-sm`}>{msg}</div>} />
                   {authError ? <div className={`text-accent2`}>{authError}</div> : ''}
                   <button type='submit' className={`${poppins.className} w-full border-2 py-[8px]`}>
-                    Create account
+                    Sign in
                   </button>
                 </div>
                 <div className='mt-4 text-center text-sm'>
-                  Already have an account?{' '}
-                  <Link href='/signin' className='underline'>
-                    Sign in
+                  Dont have an account?{' '}
+                  <Link href='/signup' className='underline'>
+                    Sign up
                   </Link>
                 </div>
               </CardContent>

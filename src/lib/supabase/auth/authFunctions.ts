@@ -11,4 +11,14 @@ const SignUpNewUser = async (values: { email: string; password: string }) => {
   if (error) return { authErrorMessage: error.message };
 };
 
-export { SignUpNewUser };
+const SignInUser = async (values: { email: string; password: string }) => {
+  const supabase = createClient();
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email: values.email,
+    password: values.password,
+  });
+
+  if (error) return { authErrorMessage: error.message };
+};
+export { SignUpNewUser, SignInUser };
