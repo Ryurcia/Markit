@@ -169,7 +169,9 @@ const page = () => {
       {/* TUT SECTION */}
       <section id='how-it-works' className={`w-full py-[200px] flex flex-col items-center justify-center gap-[64px]`}>
         <h1 className={`${poppins.className} text-h3 font-semibold`}>How does it work?</h1>
-        <div className={`w-full flex flex-row flex-wrap justify-center items-center gap-[240px]`}>
+        <div
+          className={`w-[70%] gap-[64px] md:w-full flex flex-row flex-wrap justify-center items-center lg:gap-[150px]`}
+        >
           <div className={`flex flex-col justify-center items-center `}>
             <div className={`w-[150px] h-[150px] mb-[12px] `}>
               <Image
