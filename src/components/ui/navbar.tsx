@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { FaTag, FaBriefcase, FaGear } from 'react-icons/fa6';
+import { RiMenu3Fill } from "react-icons/ri";
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import SignOutBtn from '../signout-btn';
@@ -38,14 +39,12 @@ const Navbar = async () => {
 
       <div className={`md:hidden`}>
         <DropdownMenu>
-          <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
+          <DropdownMenuTrigger><RiMenu3Fill fontSize={20}/></DropdownMenuTrigger>
+          <DropdownMenuContent className={`mt-[20px] rounded bg-primary border-0`}>
+            <DropdownMenuItem>Sales</DropdownMenuItem>
+            <DropdownMenuItem>Jobs</DropdownMenuItem>
+            <DropdownMenuItem>Services</DropdownMenuItem>
+            <DropdownMenuItem>Your Profile</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
