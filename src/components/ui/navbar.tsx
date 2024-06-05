@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { FaTag, FaBriefcase, FaGear } from 'react-icons/fa6';
 import { RiMenu3Fill } from "react-icons/ri";
+import { IoPersonCircle, IoBookmarkSharp } from "react-icons/io5";
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import SignOutBtn from '../signout-btn';
@@ -57,8 +58,9 @@ const Navbar = async () => {
           <DropdownMenuContent className={`mt-[20px] rounded bg-primary border-0`}>
             <DropdownMenuLabel>Your Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}><IoPersonCircle/> Profile</DropdownMenuItem>
+            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}><IoBookmarkSharp /> Bookmarked</DropdownMenuItem>
+            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}> <FaGear/> Settings</DropdownMenuItem>
             <DropdownMenuItem>
               <SignOutBtn />
             </DropdownMenuItem>
