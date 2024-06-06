@@ -15,7 +15,7 @@ const SignOutBtn = () => {
   };
 
   return (
-    <button onClick={() => handleSignOut()} className={`px-[15px] py-[5px] rounded font-semibold bg-accent2`}>
+    <button onClick={() => handleSignOut()} className={`w-full px-[15px] py-[5px] rounded font-semibold bg-accent2`}>
       Sign out
     </button>
   );

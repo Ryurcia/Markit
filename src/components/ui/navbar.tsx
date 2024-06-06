@@ -3,16 +3,18 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { FaTag, FaBriefcase, FaGear } from 'react-icons/fa6';
-import { RiMenu3Fill } from "react-icons/ri";
-import { IoPersonCircle, IoBookmarkSharp } from "react-icons/io5";
-import Link from 'next/link';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { FaGear } from 'react-icons/fa6';
+import { RiMenu3Fill } from 'react-icons/ri';
+import { IoPersonCircle, IoBookmarkSharp } from 'react-icons/io5';
 import { createClient } from '@/utils/supabase/server';
 import SignOutBtn from '../signout-btn';
+import DropDownNav from '../dropdown-nav';
+import { SalesCat, JobsCat, ServicesCat } from '@/utils/categories';
+import Link from 'next/link';
 
 const Navbar = async () => {
   //Get user name
@@ -26,41 +28,96 @@ const Navbar = async () => {
       className={`w-full px-[16px] flex flex-row justify-between items-center py-[16px] md:w-[90%] md:px-0 md:mx-auto `}
     >
       <h1 className={`${poppins.className} text-h3 font-semibold text-primary`}>Markit</h1>
-      <div className={`hidden flex-row gap-[32px] text-base md:flex`}>
-        <Link href={'/'} className={`flex flex-row items-center gap-[8px]`}>
-          <FaTag /> Sale
-        </Link>
-        <Link href={'/'} className={`flex flex-row items-center gap-[8px]`}>
-          <FaBriefcase /> Jobs
-        </Link>
-        <Link href={'/'} className={`flex flex-row items-center gap-[8px]`}>
-          <FaGear /> Services
-        </Link>
-      </div>
-
+      <DropDownNav />
       <div className={`md:hidden`}>
-        <DropdownMenu>
-          <DropdownMenuTrigger><RiMenu3Fill fontSize={20}/></DropdownMenuTrigger>
-          <DropdownMenuContent className={`mt-[20px] rounded bg-primary border-0`}>
-            <DropdownMenuItem>Sales</DropdownMenuItem>
-            <DropdownMenuItem>Jobs</DropdownMenuItem>
-            <DropdownMenuItem>Services</DropdownMenuItem>
-            <DropdownMenuItem>Your Profile</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Sheet>
+          <SheetTrigger>
+            <RiMenu3Fill fontSize={20} />
+          </SheetTrigger>
+          <SheetContent side={'left'} className={`bg-[#222529] border-0 w-[90%] `}>
+            <SheetHeader className={`text-left`}>
+              <SheetTitle>
+                <h1 className={`${poppins.className} text-primary font-semibold text-h3`}>Markit</h1>
+              </SheetTitle>
+            </SheetHeader>
+            <div>
+              <Accordion type='single' collapsible>
+                <AccordionItem value='item-1'>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>For Sale</AccordionTrigger>
+                  <AccordionContent className={`grid grid-cols-2`}>
+                    {SalesCat.map((cat, index) => {
+                      return (
+                        <Link key={`item-${index}`} href={cat.link} className={`p-[10px] text-base`}>
+                          {cat.title}
+                        </Link>
+                      );
+                    })}
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value='item-2'>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>Jobs</AccordionTrigger>
+                  <AccordionContent className={`grid grid-cols-2`}>
+                    {JobsCat.map((cat, index) => {
+                      return (
+                        <Link key={`item-${index}`} href={cat.link} className={`p-[10px] text-base`}>
+                          {cat.title}
+                        </Link>
+                      );
+                    })}
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value='item-3'>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>Services</AccordionTrigger>
+                  <AccordionContent className={`grid grid-cols-2`}>
+                    {ServicesCat.map((cat, index) => {
+                      return (
+                        <Link key={`item-${index}`} href={cat.link} className={`p-[10px] text-base`}>
+                          {cat.title}
+                        </Link>
+                      );
+                    })}
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value='item-4'>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>
+                    Your Profile
+                  </AccordionTrigger>
+                  <AccordionContent className={`flex flex-col`}>
+                    <Link href={'/'} className={`p-[10px] text-base `}>
+                      Profile
+                    </Link>
+                    <Link href={'/'} className={`p-[10px] text-base `}>
+                      Bookmarks
+                    </Link>
+                    <Link href={'/'} className={`p-[10px] text-base `}>
+                      Settings
+                    </Link>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+            <div className={`absolute bottom-[10px]`}>
+              <SignOutBtn />
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
       <div className={`hidden px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave md:block`}>
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
             <div className={`bg-dark w-[30px] h-[30px] rounded-[50%]`}></div>
             {res.data?.first_name} {res.data?.last_name}
           </DropdownMenuTrigger>
           <DropdownMenuContent className={`mt-[20px] rounded bg-primary border-0`}>
-            <DropdownMenuLabel>Your Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}><IoPersonCircle/> Profile</DropdownMenuItem>
-            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}><IoBookmarkSharp /> Bookmarked</DropdownMenuItem>
-            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}> <FaGear/> Settings</DropdownMenuItem>
+            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}>
+              <IoPersonCircle /> Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}>
+              <IoBookmarkSharp /> Bookmarked
+            </DropdownMenuItem>
+            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}>
+              <FaGear /> Settings
+            </DropdownMenuItem>
             <DropdownMenuItem>
               <SignOutBtn />
             </DropdownMenuItem>
