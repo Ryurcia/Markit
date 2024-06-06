@@ -105,7 +105,7 @@ const Navbar = async () => {
       <div className={`hidden px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave md:block`}>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
-            <div className={`bg-dark w-[30px] h-[30px] rounded-[50%]`}></div>
+            <div className={`bg-dark w-[25px] h-[25px] rounded-[50%]`}></div>
             {res.data?.first_name} {res.data?.last_name}
           </DropdownMenuTrigger>
           <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>

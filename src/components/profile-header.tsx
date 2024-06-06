@@ -36,7 +36,7 @@ const ProfileHeader = async ({ user_id }: { user_id: string }) => {
           <span>5.0 rating</span>
         </div>
         <Dialog modal={false}>
-          <DialogTrigger className={` bg-[#247c49] mt-4 px-[30px] py-[10px] rounded ${poppins.className} text-base`}>
+          <DialogTrigger className={` bg-[#247c49] mt-4 px-[25px] py-[8px] rounded ${poppins.className} text-sm`}>
             Profile settings
           </DialogTrigger>
           <DialogContent className={`bg-dark border-0 rounded`}>

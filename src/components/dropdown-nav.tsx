@@ -23,7 +23,7 @@ const DropDownNav = () => {
             </NavigationMenuTrigger>
             <NavigationMenuIndicator />
             <NavigationMenuContent
-              className={`bg-[#222529] absolute w-[420px] h-auto rounded p-[15px] mt-3 left-[-50%]`}
+              className={`bg-[#222529] z-50 absolute w-[420px] h-auto rounded p-[15px] mt-3 left-[-50%]`}
             >
               <h1 className={`${poppins.className} text-h3 font-semibold`}>Sale</h1>
               <div className={`grid grid-cols-2`}>
@@ -43,7 +43,7 @@ const DropDownNav = () => {
               <FaBriefcase /> Jobs
             </NavigationMenuTrigger>
             <NavigationMenuContent
-              className={`bg-[#222529] absolute w-[420px] h-auto rounded p-[15px] mt-3 left-[-50%]`}
+              className={`bg-[#222529] absolute z-50 w-[420px] h-auto rounded p-[15px] mt-3 left-[-50%]`}
             >
               <h1 className={`${poppins.className} text-h3 font-semibold`}>Jobs</h1>
               <div className={`grid grid-cols-2`}>
@@ -63,7 +63,7 @@ const DropDownNav = () => {
               <FaGear /> Services
             </NavigationMenuTrigger>
             <NavigationMenuContent
-              className={`bg-[#222529] absolute w-[420px] h-auto rounded p-[15px] mt-3 left-[-50%]`}
+              className={`bg-[#222529] absolute z-50 w-[420px] h-auto rounded p-[15px] mt-3 left-[-50%]`}
             >
               <h1 className={`${poppins.className} text-h3 font-semibold`}>Services</h1>
               <div className={`grid grid-cols-2`}>
