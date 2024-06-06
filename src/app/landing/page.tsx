@@ -7,8 +7,17 @@ import { Delivery, Secure, Search, Completion } from '../../../public/assets/svg
 import Image from 'next/image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { FlipWords } from '@/components/ui/flip-words';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
 
-const page = () => {
+const page = async () => {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) return redirect('/home');
+
   return (
     <div className={`${hind.className} relative`}>
       {/* NAVBAR */}
