@@ -4,8 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { hind, poppins } from '@/utils/font.config';
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { setupUserProfile } from '@/lib/supabase/user/userFunctions';
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
 
 const OnboardingSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -37,9 +37,23 @@ const page = () => {
         }}
         validationSchema={OnboardingSchema}
         onSubmit={async (values) => {
-          const error = await setupUserProfile(values);
+          const supabase = createClient();
+          const {
+            data: { user },
+            error,
+          } = await supabase.auth.getUser();
 
-          if (error) return setOnboardingError(error.profileError);
+          if (!user || error) throw 'no user';
+
+          const res = await supabase.from('Profile').insert({
+            id: user.id,
+            first_name: values.firstName,
+            last_name: values.lastName,
+            username: values.username,
+            email: user.email,
+          });
+
+          if (res.error?.code === '23505') return setOnboardingError('Username is taken');
 
           return router.replace('/home');
         }}

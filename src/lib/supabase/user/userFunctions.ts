@@ -1,28 +1,27 @@
-import { createClient } from '@/utils/supabase/client';
-import * as Server from '@/utils/supabase/server';
+import { createClient } from '@/utils/supabase/server';
 
-const setupUserProfile = async (values: { firstName: string; lastName: string; username: string }) => {
-  const supabase = createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+// const setupUserProfile = async (values: { firstName: string; lastName: string; username: string }) => {
+//   const supabase = createClient();
+//   const {
+//     data: { user },
+//     error,
+//   } = await supabase.auth.getUser();
 
-  if (!user || error) throw 'no user';
+//   if (!user || error) throw 'no user';
 
-  const res = await supabase.from('Profile').insert({
-    id: user.id,
-    first_name: values.firstName,
-    last_name: values.lastName,
-    username: values.username,
-    email: user.email,
-  });
+//   const res = await supabase.from('Profile').insert({
+//     id: user.id,
+//     first_name: values.firstName,
+//     last_name: values.lastName,
+//     username: values.username,
+//     email: user.email,
+//   });
 
-  if (res.error?.code === '23505') return { profileError: 'Username is taken' };
-};
+//   if (res.error?.code === '23505') return { profileError: 'Username is taken' };
+// };
 
 const getUserProfile = async (user_id: string) => {
-  const supabase = Server.createClient();
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('Profile')
     .select('first_name,last_name,bio,username,joined_on')
@@ -43,4 +42,4 @@ const getUserProfile = async (user_id: string) => {
   };
 };
 
-export { setupUserProfile, getUserProfile };
+export { getUserProfile };
