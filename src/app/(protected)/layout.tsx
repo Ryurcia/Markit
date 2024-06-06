@@ -1,4 +1,4 @@
-import Navbar from '@/components/ui/navbar';
+import Navbar from '@/components/navbar';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 

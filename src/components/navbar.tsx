@@ -11,8 +11,8 @@ import { FaGear } from 'react-icons/fa6';
 import { RiMenu3Fill } from 'react-icons/ri';
 import { IoPersonCircle, IoBookmarkSharp } from 'react-icons/io5';
 import { createClient } from '@/utils/supabase/server';
-import SignOutBtn from '../signout-btn';
-import DropDownNav from '../dropdown-nav';
+import SignOutBtn from './signout-btn';
+import DropDownNav from './dropdown-nav';
 import { SalesCat, JobsCat, ServicesCat } from '@/utils/categories';
 import Link from 'next/link';
 
@@ -83,7 +83,7 @@ const Navbar = async () => {
                     Your Profile
                   </AccordionTrigger>
                   <AccordionContent className={`flex flex-col`}>
-                    <Link href={'/'} className={`p-[10px] text-base `}>
+                    <Link href={'/profile'} className={`p-[10px] text-base `}>
                       Profile
                     </Link>
                     <Link href={'/'} className={`p-[10px] text-base `}>
@@ -108,15 +108,21 @@ const Navbar = async () => {
             <div className={`bg-dark w-[30px] h-[30px] rounded-[50%]`}></div>
             {res.data?.first_name} {res.data?.last_name}
           </DropdownMenuTrigger>
-          <DropdownMenuContent className={`mt-[20px] rounded bg-primary border-0`}>
-            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}>
-              <IoPersonCircle /> Profile
+          <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
+            <DropdownMenuItem>
+              <Link href={'/profile'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                <IoPersonCircle /> Profile
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}>
-              <IoBookmarkSharp /> Bookmarked
+            <DropdownMenuItem>
+              <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                <IoBookmarkSharp /> Bookmarked
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className={`flex flex-row items-center gap-[5px]`}>
-              <FaGear /> Settings
+            <DropdownMenuItem>
+              <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                <FaGear /> Settings
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <SignOutBtn />
