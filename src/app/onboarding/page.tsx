@@ -101,7 +101,7 @@ const page = () => {
                   <div className='grid grid-cols-2 gap-4'></div>
                   <div className={`grid gap-2`}>
                   <label htmlFor="pfp">Select Profile Picture</label>
-                    <input type="file" required ref={pfpRef} />
+                    <input className={`block w-full`} type="file" required ref={pfpRef} accept='image/*' />
                   </div>
                   <div className='grid gap-2'>
                     <label htmlFor='firstName' className={`${hind.className} text-base w-full`}>
