@@ -15,13 +15,15 @@ import SignOutBtn from './signout-btn';
 import DropDownNav from './dropdown-nav';
 import { SalesCat, JobsCat, ServicesCat } from '@/utils/categories';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Navbar = async () => {
   //Get user name
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
   if (!data.user) throw 'Error: No User';
-  const res = await supabase.from('Profile').select('first_name,last_name').eq('id', data.user.id).limit(1).single();
+  const res = await supabase.from('Profile').select('first_name,last_name,username').eq('id', data.user.id).limit(1).single();
+  const { data:{publicUrl} } = await supabase.storage.from('avatars').getPublicUrl(`public/${data.user.id}`);
 
   return (
     <div
@@ -105,7 +107,18 @@ const Navbar = async () => {
       <div className={`hidden px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave md:block`}>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
-            <div className={`bg-dark w-[25px] h-[25px] rounded-[50%]`}></div>
+            {/* PFP */}
+            <div className={`relative bg-dark w-[30px] h-[30px] rounded-[50%]`}>
+            <Image src={publicUrl} alt={res.data?.username} width={30} height={30} style={{
+            position:'absolute',
+            borderRadius:'50%',
+            width:'100%',
+            height:'100%',
+            objectFit:'cover'
+            }}
+            priority
+            />
+              </div> 
             {res.data?.first_name} {res.data?.last_name}
           </DropdownMenuTrigger>
           <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
