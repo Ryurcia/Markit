@@ -27,9 +27,9 @@ const Navbar = async () => {
 
   return (
     <div
-      className={`w-full px-[16px] flex flex-row justify-between items-center py-[16px] md:w-[90%] md:px-0 md:mx-auto `}
+      className={`w-full px-[16px] flex flex-row justify-between items-center py-[16px] md:w-[95%] md:px-0 md:mx-auto `}
     >
-      <div>
+      <div className={`flex gap-4 items-center`}>
         <Sheet>
           <SheetTrigger>
             <RiMenu2Line fontSize={20} />
@@ -101,6 +101,7 @@ const Navbar = async () => {
             </div>
           </SheetContent>
         </Sheet>
+        <Link href={'/home'} className={`text-h3 text-primary font-semibold`}>Markit</Link>
       </div>
 
       <div className={`flex flex-row items-center gap-[16px]`}>
