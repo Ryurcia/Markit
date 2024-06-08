@@ -8,7 +8,7 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { FaGear } from 'react-icons/fa6';
-import { RiMenu3Fill } from 'react-icons/ri';
+import { RiMenu2Line } from "react-icons/ri";
 import { IoPersonCircle, IoBookmarkSharp } from 'react-icons/io5';
 import { createClient } from '@/utils/supabase/server';
 import SignOutBtn from './signout-btn';
@@ -29,12 +29,10 @@ const Navbar = async () => {
     <div
       className={`w-full px-[16px] flex flex-row justify-between items-center py-[16px] md:w-[90%] md:px-0 md:mx-auto `}
     >
-      <h1 className={`${poppins.className} text-h3 font-semibold text-primary`}>Markit</h1>
-      <DropDownNav />
-      <div className={`md:hidden`}>
+      <div>
         <Sheet>
           <SheetTrigger>
-            <RiMenu3Fill fontSize={20} />
+            <RiMenu2Line fontSize={20} />
           </SheetTrigger>
           <SheetContent side={'left'} className={`bg-[#222529] border-0 w-[90%] `}>
             <SheetHeader className={`text-left`}>
@@ -91,7 +89,7 @@ const Navbar = async () => {
                     <Link href={'/'} className={`p-[10px] text-base `}>
                       Bookmarks
                     </Link>
-                    <Link href={'/'} className={`p-[10px] text-base `}>
+                    <Link href={'/profile/settings'} className={`p-[10px] text-base `}>
                       Settings
                     </Link>
                   </AccordionContent>
@@ -104,44 +102,47 @@ const Navbar = async () => {
           </SheetContent>
         </Sheet>
       </div>
-      <div className={`hidden px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave md:block`}>
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
-            {/* PFP */}
-            <div className={`relative bg-dark w-[30px] h-[30px] rounded-[50%]`}>
-            <Image src={publicUrl} alt={res.data?.username} width={30} height={30} style={{
-            position:'absolute',
-            borderRadius:'50%',
-            width:'100%',
-            height:'100%',
-            objectFit:'cover'
-            }}
-            priority
-            />
+
+      <div className={`flex flex-row items-center gap-[16px]`}>
+        <button className={` text-sm px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave`}>+ Create post</button>
+        <div className={`hidden rounded-[30px] md:block`}>
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
+              {/* PFP */}
+              <div className={`relative bg-dark w-[45px] h-[45px] rounded-[50%] border-2 border-primary`}>
+                <Image src={publicUrl} alt={res.data?.username} width={30} height={30} style={{
+                position:'absolute',
+                borderRadius:'50%',
+                width:'100%',
+                height:'100%',
+                objectFit:'cover'
+                }}
+                priority
+                />
               </div> 
-            {res.data?.first_name} {res.data?.last_name}
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
-            <DropdownMenuItem>
-              <Link href={'/profile'} className={`flex flex-row items-center gap-[5px] text-base`}>
-                <IoPersonCircle /> Profile
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
-                <IoBookmarkSharp /> Bookmarked
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
-                <FaGear /> Settings
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <SignOutBtn />
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
+              <DropdownMenuItem>
+                <Link href={'/profile'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                  <IoPersonCircle /> Profile
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                  <IoBookmarkSharp /> Bookmarked
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href={'/profile/settings'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                  <FaGear /> Settings
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <SignOutBtn />
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </div>
   );
