@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
  const SettingsSchema = Yup.object().shape({
    first_name: Yup.string()
@@ -68,9 +69,17 @@ const page = () => {
                validationSchema={SettingsSchema}
                onSubmit={async(values) => {
                  const supabase = createClient();
-                 if(!values.first_name) values.first_name = firstName;
-                 if(!values.last_name) values.last_name = lastName;
-                 if(!values.bio) values.bio = currBio;
+                if (values.first_name === '') {
+                  values.first_name = firstName;
+                }
+
+                if (values.last_name === '') {
+                  values.last_name = lastName;
+                }
+
+                if (values.bio === '') {
+                  values.bio = currBio;
+                }
 
                  await supabase.from("Profile").update({first_name:values.first_name,last_name: values.last_name,bio:values.bio}).eq('id',userId);
 
@@ -104,12 +113,13 @@ const page = () => {
                         </CardContent>
                         <CardFooter className={`grid grid-cols-2 gap-2`}>
                             <button type="submit" className={`px-[30px] py-[10px] bg-primary rounded`}>Save</button>
-                            <button className={`border-[1px] border-accent2 rounded px-[30px] py-[10px] hover:bg-accent2`} onClick={() => router.replace('/profile')}>Cancel</button>
+                           <Link href={`/profile`} className={`border-[1px] border-accent2 rounded px-[30px] py-[10px] hover:bg-accent2 text-center`}>Cancel</Link>
                         </CardFooter>
                         </Card>
                   </Form>
                 )}
                </Formik>
+                
             </div>
         </div>
     )
