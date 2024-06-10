@@ -8,11 +8,10 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { FaGear } from 'react-icons/fa6';
-import { RiMenu2Line } from "react-icons/ri";
+import { RiMenu2Line } from 'react-icons/ri';
 import { IoPersonCircle, IoBookmarkSharp } from 'react-icons/io5';
 import { createClient } from '@/utils/supabase/server';
 import SignOutBtn from './signout-btn';
-import DropDownNav from './dropdown-nav';
 import { SalesCat, JobsCat, ServicesCat } from '@/utils/categories';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,15 +21,22 @@ const Navbar = async () => {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
   if (!data.user) throw 'Error: No User';
-  const res = await supabase.from('Profile').select('first_name,last_name,username').eq('id', data.user.id).limit(1).single();
-  const { data:{publicUrl} } = await supabase.storage.from('avatars').getPublicUrl(`public/${data.user.id}`);
+  const res = await supabase
+    .from('Profile')
+    .select('first_name,last_name,username')
+    .eq('id', data.user.id)
+    .limit(1)
+    .single();
+  const {
+    data: { publicUrl },
+  } = await supabase.storage.from('avatars').getPublicUrl(`public/${data.user.id}`);
 
   return (
     <div
       className={`w-full px-[16px] flex flex-row justify-between items-center py-[16px] md:w-[95%] md:px-0 md:mx-auto `}
     >
       <div className={`flex gap-4 items-center`}>
-        <Sheet>
+        <Sheet modal={false}>
           <SheetTrigger>
             <RiMenu2Line fontSize={20} />
           </SheetTrigger>
@@ -101,26 +107,38 @@ const Navbar = async () => {
             </div>
           </SheetContent>
         </Sheet>
-        <Link href={'/home'} className={`text-h3 text-primary font-semibold`}>Markit</Link>
+        <Link href={'/home'} className={`text-h3 text-primary font-semibold`}>
+          Markit
+        </Link>
       </div>
 
       <div className={`flex flex-row items-center gap-[16px]`}>
-        <Link href={`/post/createPost`} className={` text-sm px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave`}>+ Create post</Link>
+        <Link
+          href={`/post/createPost`}
+          className={` text-sm px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave`}
+        >
+          + Create post
+        </Link>
         <div className={`hidden rounded-[30px] md:block`}>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
               {/* PFP */}
               <div className={`relative bg-dark w-[45px] h-[45px] rounded-[50%] border-2 border-primary`}>
-                <Image src={publicUrl} alt={res.data?.username} width={30} height={30} style={{
-                position:'absolute',
-                borderRadius:'50%',
-                width:'100%',
-                height:'100%',
-                objectFit:'cover'
-                }}
-                priority
+                <Image
+                  src={publicUrl}
+                  alt={res.data?.username}
+                  width={30}
+                  height={30}
+                  style={{
+                    position: 'absolute',
+                    borderRadius: '50%',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  priority
                 />
-              </div> 
+              </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
               <DropdownMenuItem>
