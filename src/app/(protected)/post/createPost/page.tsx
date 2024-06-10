@@ -19,7 +19,7 @@ const page = () => {
 
   return (
     <div
-      className={`px-[16px] md:w-[95%] md:px-0 mx-auto mt-[32px] pb-[20px] grid grid-row-2 grid-cols-1 items-center justify-center gap-6 md:justify-center `}
+      className={`w-[90%] md:w-[95%] md:px-0 mx-auto mt-[32px] pb-[20px] grid grid-row-2 grid-cols-1 items-center justify-center gap-6 md:justify-center `}
     >
       <h1 className={`${poppins.className} text-h3 font-semibold`}>Create Post</h1>
 
