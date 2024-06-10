@@ -40,7 +40,7 @@ const Navbar = async () => {
           <SheetTrigger>
             <RiMenu2Line fontSize={20} />
           </SheetTrigger>
-          <SheetContent side={'left'} className={`bg-[#222529] border-0 w-[90%] `}>
+          <SheetContent side={'left'} className={`bg-[#222529] border-0 w-[90%] overflow-y-scroll`}>
             <SheetHeader className={`text-left`}>
               <SheetTitle>
                 <h1 className={`${poppins.className} text-primary font-semibold text-h3`}>Markit</h1>
