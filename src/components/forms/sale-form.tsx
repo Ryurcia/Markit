@@ -94,8 +94,8 @@ const SaleForm = () => {
         }}
       >
         {({ errors, touched }) => (
-          <Form className={`grid grid-rows-[9] gap-3`}>
-            <div className={`grid grid-rows-2 gap-2 items-center`}>
+          <Form className={`grid gap-3`}>
+            <div className={`grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='title'>
                 Title
               </label>
@@ -103,7 +103,7 @@ const SaleForm = () => {
               <ErrorMessage name='title' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
             </div>
 
-            <div className={`grid grid-row-2 gap-2 items-center`}>
+            <div className={`grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='description'>
                 Description
               </label>
@@ -111,11 +111,11 @@ const SaleForm = () => {
               <ErrorMessage name='description' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
             </div>
 
-            <div className={`grid grid-row-2 gap-2 items-center`}>
+            <div className={`grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='email'>
                 Contact info *optional
               </label>
-              <div className={`grid grid-row-2 gap-2`}>
+              <div className={`grid gap-2`}>
                 <div className={`grid grid-row-2`}>
                   <label htmlFor='email'>Email</label>
                   <Field
@@ -138,7 +138,7 @@ const SaleForm = () => {
               </div>
             </div>
 
-            <div className={`grid grid-row-2 gap-2 items-center`}>
+            <div className={`grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='price'>
                 Price
               </label>
@@ -146,7 +146,7 @@ const SaleForm = () => {
               <ErrorMessage name='price' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
             </div>
 
-            <div className={`grid grid-row-2 gap-2 items-center`}>
+            <div className={`grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='condition'>
                 Condition
               </label>
@@ -160,7 +160,7 @@ const SaleForm = () => {
               </Field>
             </div>
 
-            <div className={`grid grid-row-2 gap-2 items-center`}>
+            <div className={`grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='tag'>
                 Tag
               </label>
@@ -175,11 +175,11 @@ const SaleForm = () => {
               </Field>
             </div>
 
-            <div className={`grid grid-row-2 gap-2 items-center`}>
+            <div className={`grid  gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='images'>
                 Images
               </label>
-              <input ref={imagesRef} className='max-w-[500px]' type='file' accept='images/*' />
+              <input ref={imagesRef} className='max-w-[500px]' type='file' accept='image/*' />
             </div>
 
             <button className={`w-full bg-primary py-[15px] rounded text-base font-semibold`} type='submit'>
