@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { poppins } from '@/utils/font.config';
 import { Textarea } from '@/components/ui/textarea';
 import { SalesCat } from '@/utils/categories';
+import Link from 'next/link';
 
 const SaleFormSchema = Yup.object().shape({
   title: Yup.string().min(10, 'Title is too short').max(20, 'Title is too long').required('Title is required'),
@@ -16,7 +17,7 @@ const SaleFormSchema = Yup.object().shape({
 
 const SaleForm = () => {
   return (
-    <div className={`w-full `}>
+    <div className={`w-full`}>
       <Formik
         initialValues={{
           title: '',
@@ -30,7 +31,7 @@ const SaleForm = () => {
         onSubmit={(values) => console.log(values)}
       >
         {({ errors, touched }) => (
-          <Form className={`grid grid-rows-[8] gap-3`}>
+          <Form className={`grid grid-rows-[9] gap-3`}>
             <div className={`grid grid-rows-2 gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='title'>
                 Title
@@ -120,6 +121,7 @@ const SaleForm = () => {
             <button className={`bg-primary p-[15px] rounded text-base font-semibold`} type='submit'>
               Post
             </button>
+            <Link className={`border-2 border-accent2 text-center p-[15px] rounded`} href={`/home`}>Cancel</Link>
           </Form>
         )}
       </Formik>

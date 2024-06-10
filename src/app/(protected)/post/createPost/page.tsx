@@ -1,7 +1,8 @@
 'use client';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import {useState } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { poppins } from '@/utils/font.config';
 
 const SaleForm = dynamic(() => import('@/components/forms/sale-form'), {
   loading: () => <h1>LOADING</h1>,
@@ -20,7 +21,7 @@ const page = () => {
     <div
       className={`px-[16px] md:w-[95%] md:px-0 mx-auto py-[32px] grid grid-row-2 grid-cols-1 items-center justify-center gap-6 md:justify-center`}
     >
-      <h1>Create Post </h1>
+      <h1 className={`${poppins.className} text-h3 font-semibold`}>Create Post</h1>
 
       <div className={`grid grid-rows-2 items-center`}>
         <h1 className={`font-medium`}>Select Category</h1>
@@ -43,7 +44,7 @@ const page = () => {
       </div>
 
       {/* Lazy render different forms based on form type */}
-      <div>
+      <div className={`w-full`}>
         {formType === FormType.SALE && <SaleForm />}
         {formType === FormType.JOB && <h1>Job</h1>}
         {formType === FormType.SERVICE && <h1>Service</h1>}
