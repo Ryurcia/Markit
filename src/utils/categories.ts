@@ -8,7 +8,7 @@ const SalesCat = [
     link: '/sales/Antiques',
   },
   {
-    title: 'Arts + Crafts',
+    title: 'Arts & Crafts',
     link: '/sales/arts',
   },
   {

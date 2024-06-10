@@ -31,25 +31,23 @@ const page = () => {
     const supabase = createClient();
 
     supabase.auth.getUser().then((res) => {
-      if(!res.data.user) throw 'No User';
-      
+      if (!res.data.user) throw 'No User';
+
       checkIfUserHasUsername(res.data.user.id).then((res) => {
-        if(!res) return;
+        if (!res) return;
 
-        return router.replace('/home')
-      })
+        return router.replace('/home');
+      });
+    });
 
-    })
+    const checkIfUserHasUsername = async (user_id: string) => {
+      const hasUsername = await supabase.from('Profile').select('*', { count: 'exact' }).eq('id', user_id);
 
-    const checkIfUserHasUsername = async(user_id:string) => {
-      const hasUsername = await supabase.from('Profile').select('*',{count:'exact'}).eq('id',user_id);
-
-      if(!hasUsername.count) return false;
+      if (!hasUsername.count) return false;
 
       return true;
-    }
-
-  },[]);
+    };
+  }, []);
 
   return (
     <div className={`h-dvh flex flex-col justify-center`}>
@@ -75,13 +73,13 @@ const page = () => {
             last_name: values.lastName,
             username: values.username,
             email: user.email,
-            bio:'Just joined Markit!'
+            bio: 'Just joined Markit!',
           });
 
-          if(!pfpRef.current?.files) return;
+          if (!pfpRef.current?.files) return;
           const upload = pfpRef.current.files[0];
-          const {data} = await supabase.storage.from('avatars').upload(`public/${user.id}`,upload)
-    
+          const { data } = await supabase.storage.from('avatars').upload(`public/${user.id}`, upload);
+
           if (res.error?.code === '23505') return setOnboardingError('Username is taken');
 
           return router.replace('/home');
@@ -100,8 +98,8 @@ const page = () => {
                 <div className='grid gap-4'>
                   <div className='grid grid-cols-2 gap-4'></div>
                   <div className={`grid gap-2`}>
-                  <label htmlFor="pfp">Select Profile Picture</label>
-                    <input className={`block w-full`} type="file" required ref={pfpRef} accept='image/*' />
+                    <label htmlFor='pfp'>Select Profile Picture</label>
+                    <input className={`block w-full`} type='file' required ref={pfpRef} accept='image/*' />
                   </div>
                   <div className='grid gap-2'>
                     <label htmlFor='firstName' className={`${hind.className} text-base w-full`}>

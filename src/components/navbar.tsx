@@ -105,7 +105,7 @@ const Navbar = async () => {
       </div>
 
       <div className={`flex flex-row items-center gap-[16px]`}>
-        <button className={` text-sm px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave`}>+ Create post</button>
+        <Link href={`/post/createPost`} className={` text-sm px-[15px] py-[8px] rounded-[30px] font-semibold animate-diagonal-green-wave`}>+ Create post</Link>
         <div className={`hidden rounded-[30px] md:block`}>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
