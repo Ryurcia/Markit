@@ -1,21 +1,50 @@
 'use client';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { poppins } from '@/utils/font.config';
 import { Textarea } from '@/components/ui/textarea';
 import { SalesCat } from '@/utils/categories';
 import Link from 'next/link';
+import { createClient } from '@/utils/supabase/client';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/ui/use-toast';
 
 const SaleFormSchema = Yup.object().shape({
-  title: Yup.string().min(10, 'Title is too short').max(20, 'Title is too long').required('Title is required'),
+  title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
   description: Yup.string().max(250, 'Description is too long'),
   price: Yup.number().required('Price is required').typeError('Must be a number').max(20000, 'Max price exceeded'),
   email: Yup.string().email('Invalid email'),
-  telNo: Yup.number().typeError('Must be a number').max(1000000000, 'Max price exceeded'),
+  telNo: Yup.number().typeError('Must be a number').max(9000000000, 'Not a phone no'),
+  condition: Yup.string(),
+  tag: Yup.string(),
 });
 
 const SaleForm = () => {
+  const [userId, setUserId] = useState('');
+  const [username, setUsername] = useState('');
+
+  const imagesRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then((res) => {
+      if (!res.data.user) throw 'no user';
+      setUserId(res.data.user.id);
+      supabase
+        .from('Profile')
+        .select('username')
+        .eq('id', res.data.user.id)
+        .limit(1)
+        .single()
+        .then((res) => {
+          setUsername(res.data?.username);
+        });
+    });
+  }, []);
+
   return (
     <div className={`w-full`}>
       <Formik
@@ -24,11 +53,45 @@ const SaleForm = () => {
           description: '',
           price: '',
           email: '',
-          tag: '',
+          tag: SalesCat[1].title,
           telNo: '',
+          condition: 'New',
         }}
         validationSchema={SaleFormSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={async (values) => {
+          const supabase = createClient();
+          const { data } = await supabase
+            .from('Sale_Post')
+            .insert([
+              {
+                title: values.title,
+                description: values.description,
+                price: (Math.round(Number(values.price) * 100) / 100).toFixed(2),
+                tag: values.tag,
+                condition: values.condition,
+                post_author: userId,
+                post_author_username: username,
+              },
+            ])
+            .select('id');
+
+          if (!data) throw 'No Post Created';
+
+          console.log(imagesRef.current?.files);
+          //Upload Images
+          if (imagesRef.current?.files) {
+            const { error } = await supabase.storage
+              .from('sale')
+              .upload(`public/sale_${data[0].id}`, imagesRef.current.files[0]);
+            console.log(error?.message);
+          }
+
+          router.back();
+
+          return toast({
+            title: 'Post Created',
+          });
+        }}
       >
         {({ errors, touched }) => (
           <Form className={`grid grid-rows-[9] gap-3`}>
@@ -88,10 +151,12 @@ const SaleForm = () => {
                 Condition
               </label>
               <Field className={`w-[180px] text-dark p-[10px] rounded`} name='condition' as='select'>
-                <option className={`hover:bg-primary`} value='New'>
+                <option className={`text-dark`} value='New'>
                   New
                 </option>
-                <option value='Used'>Used</option>
+                <option value='Used' className={`text-dark`}>
+                  Used
+                </option>
               </Field>
             </div>
 
@@ -102,7 +167,7 @@ const SaleForm = () => {
               <Field className={`w-[180px] text-dark p-[10px] rounded`} name='tag' as='select'>
                 {SalesCat.slice(1).map((cat, index) => {
                   return (
-                    <option key={index} value={cat.title}>
+                    <option className={`text-dark hover:bg-primary`} key={index} value={cat.title}>
                       {cat.title}
                     </option>
                   );
@@ -111,17 +176,18 @@ const SaleForm = () => {
             </div>
 
             <div className={`grid grid-row-2 gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='price'>
+              <label className={`${poppins.className} text-sub font-medium`} htmlFor='images'>
                 Images
               </label>
-              <input type='file' accept='images/*' multiple />
-              <ErrorMessage name='price' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
+              <input ref={imagesRef} className='max-w-[500px]' type='file' accept='images/*' />
             </div>
 
-            <button className={`bg-primary p-[15px] rounded text-base font-semibold`} type='submit'>
+            <button className={`w-full bg-primary py-[15px] rounded text-base font-semibold`} type='submit'>
               Post
             </button>
-            <Link className={`border-2 border-accent2 text-center p-[15px] rounded`} href={`/home`}>Cancel</Link>
+            <Link className={`border-2 border-accent2 text-center p-[15px] rounded`} href={`/home`}>
+              Cancel
+            </Link>
           </Form>
         )}
       </Formik>

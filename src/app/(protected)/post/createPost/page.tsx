@@ -19,12 +19,12 @@ const page = () => {
 
   return (
     <div
-      className={`px-[16px] md:w-[95%] md:px-0 mx-auto py-[32px] grid grid-row-2 grid-cols-1 items-center justify-center gap-6 md:justify-center `}
+      className={`px-[16px] md:w-[95%] md:px-0 mx-auto mt-[32px] pb-[20px] grid grid-row-2 grid-cols-1 items-center justify-center gap-6 md:justify-center `}
     >
       <h1 className={`${poppins.className} text-h3 font-semibold`}>Create Post</h1>
 
       <div className={`grid grid-rows-2 items-center`}>
-        <h1 className={`font-medium`}>Select Category</h1>
+        <h1 className={`text-[20px] font-semibold`}>Select Category</h1>
         <Select onValueChange={(e) => setFormType(e)}>
           <SelectTrigger className='w-[180px] text-lg rounded border-0 bg-dark px-[15px] py-[20px] '>
             <SelectValue placeholder={'Select type'} />
