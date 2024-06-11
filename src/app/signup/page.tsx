@@ -71,12 +71,9 @@ const page = () => {
                   <button type='submit' className={`${poppins.className} w-full border-2 py-[8px]`}>
                     Create account
                   </button>
-                  <button
-                    onClick={() => router.replace('/home')}
-                    className={`${poppins.className} w-full border-2 py-[8px]`}
-                  >
+                  <Link href={`/home`} className={`${poppins.className} w-full border-2 py-[8px] text-center`}>
                     Continue to site
-                  </button>
+                  </Link>
                 </div>
                 <div className='mt-4 text-center text-sm'>
                   Already have an account?{' '}
