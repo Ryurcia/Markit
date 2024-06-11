@@ -9,7 +9,7 @@ const SignOutBtn = () => {
   const handleSignOut = () => {
     const supabase = createClient();
     supabase.auth.signOut().then((_res) => {
-      router.replace('/signin');
+      router.replace('/home');
       return router.refresh();
     });
   };

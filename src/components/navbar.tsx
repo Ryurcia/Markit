@@ -20,16 +20,17 @@ const Navbar = async () => {
   //Get user name
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
-  if (!data.user) throw 'Error: No User';
-  const res = await supabase
-    .from('Profile')
-    .select('first_name,last_name,username')
-    .eq('id', data.user.id)
-    .limit(1)
-    .single();
-  const {
-    data: { publicUrl },
-  } = await supabase.storage.from('avatars').getPublicUrl(`public/${data.user.id}`);
+  let profilePic;
+
+  if (!data.user) {
+    profilePic = '';
+  } else {
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from('avatars').getPublicUrl(`public/${data.user.id}`);
+
+    profilePic = publicUrl;
+  }
 
   return (
     <div
@@ -90,22 +91,26 @@ const Navbar = async () => {
                     })}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value='item-4'>
-                  <AccordionTrigger className={`${poppins.className} font-semibold text-sub md:text-h3`}>
-                    Your Profile
-                  </AccordionTrigger>
-                  <AccordionContent className={`flex flex-col`}>
-                    <Link href={'/profile'} className={`p-[10px] text-base `}>
-                      Profile
-                    </Link>
-                    <Link href={'/'} className={`p-[10px] text-base `}>
-                      Bookmarks
-                    </Link>
-                    <Link href={'/profile/settings'} className={`p-[10px] text-base `}>
-                      Settings
-                    </Link>
-                  </AccordionContent>
-                </AccordionItem>
+                {!data.user ? (
+                  ''
+                ) : (
+                  <AccordionItem className={`md:hidden`} value='item-4'>
+                    <AccordionTrigger className={`${poppins.className} font-semibold text-sub md:text-h3`}>
+                      Your Profile
+                    </AccordionTrigger>
+                    <AccordionContent className={`flex flex-col`}>
+                      <Link href={'/profile'} className={`p-[10px] text-base `}>
+                        Profile
+                      </Link>
+                      <Link href={'/'} className={`p-[10px] text-base `}>
+                        Bookmarks
+                      </Link>
+                      <Link href={'/profile/settings'} className={`p-[10px] text-base `}>
+                        Settings
+                      </Link>
+                    </AccordionContent>
+                  </AccordionItem>
+                )}
               </Accordion>
             </div>
             <div className={`absolute bottom-[10px]`}>
@@ -125,49 +130,55 @@ const Navbar = async () => {
         >
           + Create post
         </Link>
-        <div className={`hidden rounded-[30px] md:block`}>
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
-              {/* PFP */}
-              <div className={`relative bg-dark w-[45px] h-[45px] rounded-[50%] border-2 border-primary`}>
-                <Image
-                  src={publicUrl}
-                  alt={res.data?.username}
-                  width={30}
-                  height={30}
-                  style={{
-                    position: 'absolute',
-                    borderRadius: '50%',
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                  priority
-                />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
-              <DropdownMenuItem>
-                <Link href={'/profile'} className={`flex flex-row items-center gap-[5px] text-base`}>
-                  <IoPersonCircle /> Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
-                  <IoBookmarkSharp /> Bookmarked
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href={'/profile/settings'} className={`flex flex-row items-center gap-[5px] text-base`}>
-                  <FaGear /> Settings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <SignOutBtn />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        {!data.user ? (
+          <div className={`text-[14px]`}>
+            <Link href={`/signin`}>Sign in</Link> | <Link href={`/signup`}>Register</Link>
+          </div>
+        ) : (
+          <div className={`hidden rounded-[30px] md:block`}>
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger className={`flex flex-row items-center gap-[8px]`}>
+                {/* PFP */}
+                <div className={`relative bg-dark w-[45px] h-[45px] rounded-[50%] border-2 border-primary`}>
+                  <Image
+                    src={profilePic}
+                    alt='profile_pic'
+                    width={30}
+                    height={30}
+                    style={{
+                      position: 'absolute',
+                      borderRadius: '50%',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    priority
+                  />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
+                <DropdownMenuItem>
+                  <Link href={'/profile'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                    <IoPersonCircle /> Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                    <IoBookmarkSharp /> Bookmarked
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={'/profile/settings'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                    <FaGear /> Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <SignOutBtn />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        )}
       </div>
     </div>
   );
