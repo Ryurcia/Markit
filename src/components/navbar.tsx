@@ -37,10 +37,10 @@ const Navbar = async () => {
     >
       <div className={`flex gap-4 items-center`}>
         <Sheet modal={false}>
-          <SheetTrigger>
+          <SheetTrigger className={`pt-[4px]`}>
             <RiMenu2Line fontSize={20} />
           </SheetTrigger>
-          <SheetContent side={'left'} className={`bg-[#222529] border-0 w-[90%] overflow-y-scroll`}>
+          <SheetContent side={'left'} className={`bg-[#222529] border-0 w-[90%]`}>
             <SheetHeader className={`text-left`}>
               <SheetTitle>
                 <h1 className={`${poppins.className} text-primary font-semibold text-h3`}>Markit</h1>
@@ -49,7 +49,9 @@ const Navbar = async () => {
             <div>
               <Accordion type='single' collapsible>
                 <AccordionItem value='item-1'>
-                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>For Sale</AccordionTrigger>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-sub md:text-h3`}>
+                    For Sale
+                  </AccordionTrigger>
                   <AccordionContent className={`grid grid-cols-2`}>
                     {SalesCat.map((cat, index) => {
                       return (
@@ -61,7 +63,9 @@ const Navbar = async () => {
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value='item-2'>
-                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>Jobs</AccordionTrigger>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-sub md:text-h3`}>
+                    Jobs
+                  </AccordionTrigger>
                   <AccordionContent className={`grid grid-cols-2`}>
                     {JobsCat.map((cat, index) => {
                       return (
@@ -73,7 +77,9 @@ const Navbar = async () => {
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value='item-3'>
-                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>Services</AccordionTrigger>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-sub md:text-h3`}>
+                    Services
+                  </AccordionTrigger>
                   <AccordionContent className={`grid grid-cols-2`}>
                     {ServicesCat.map((cat, index) => {
                       return (
@@ -85,7 +91,7 @@ const Navbar = async () => {
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value='item-4'>
-                  <AccordionTrigger className={`${poppins.className} font-semibold text-h3`}>
+                  <AccordionTrigger className={`${poppins.className} font-semibold text-sub md:text-h3`}>
                     Your Profile
                   </AccordionTrigger>
                   <AccordionContent className={`flex flex-col`}>

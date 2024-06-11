@@ -179,7 +179,7 @@ const SaleForm = () => {
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='images'>
                 Images
               </label>
-              <input ref={imagesRef} className='max-w-[500px]' type='file' accept='image/*' />
+              <input ref={imagesRef} className='max-w-[500px]' type='file' accept='image/*' required />
             </div>
 
             <button className={`w-full bg-primary py-[15px] rounded text-base font-semibold`} type='submit'>

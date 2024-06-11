@@ -8,6 +8,10 @@ const SaleForm = dynamic(() => import('@/components/forms/sale-form'), {
   loading: () => <h1>LOADING</h1>,
 });
 
+const JobForm = dynamic(() => import('@/components/forms/job-form'), {
+  loading: () => <h1>LOADING</h1>,
+});
+
 enum FormType {
   SALE = 'Sale',
   JOB = 'Job',
@@ -15,7 +19,7 @@ enum FormType {
 }
 
 const page = () => {
-  const [formType, setFormType] = useState<string>(FormType.JOB);
+  const [formType, setFormType] = useState<string>('');
 
   return (
     <div
@@ -46,7 +50,7 @@ const page = () => {
       {/* Lazy render different forms based on form type */}
       <div className={`w-full`}>
         {formType === FormType.SALE && <SaleForm />}
-        {formType === FormType.JOB && <h1>Job</h1>}
+        {formType === FormType.JOB && <JobForm />}
         {formType === FormType.SERVICE && <h1>Service</h1>}
       </div>
     </div>
