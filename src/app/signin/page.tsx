@@ -35,7 +35,7 @@ const page = () => {
       >
         {({ errors, touched }) => (
           <Form>
-            <Card className='mx-auto max-w-[400px] animate-diagonal-green-wave rounded border-0'>
+            <Card className='mx-auto h-dvh flex flex-col justify-center md:flex-none min-[406px]:h-auto max-w-[400px] animate-diagonal-green-wave rounded border-0'>
               <CardHeader>
                 <CardTitle className={`${poppins.className} text-h3`}>Sign in</CardTitle>
                 <CardDescription className={`${poppins.className} text-sm`}>Welcome Back!</CardDescription>

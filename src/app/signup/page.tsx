@@ -39,7 +39,7 @@ const page = () => {
       >
         {({ errors, touched }) => (
           <Form>
-            <Card className='mx-auto max-w-[400px] animate-diagonal-green-wave rounded border-0'>
+            <Card className='mx-auto h-dvh flex flex-col justify-center md:flex-none min-[406px]:h-auto max-w-[400px] animate-diagonal-green-wave rounded border-0'>
               <CardHeader>
                 <CardTitle className={`${poppins.className} text-h3`}>Sign Up</CardTitle>
                 <CardDescription className={`${poppins.className} text-sm`}>
@@ -61,7 +61,7 @@ const page = () => {
                   </div>
                   <div className='grid gap-2'>
                     <label htmlFor='password' className={`${hind.className} text-base`}>
-                      Password
+                      Create password
                     </label>
                     <Field name='password' className={`text-dark border-0 w-full p-[8px]`} type='password' />
                   </div>
@@ -70,6 +70,12 @@ const page = () => {
                   {authError ? <div className={`text-accent2`}>{authError}</div> : ''}
                   <button type='submit' className={`${poppins.className} w-full border-2 py-[8px]`}>
                     Create account
+                  </button>
+                  <button
+                    onClick={() => router.replace('/home')}
+                    className={`${poppins.className} w-full border-2 py-[8px]`}
+                  >
+                    Continue to site
                   </button>
                 </div>
                 <div className='mt-4 text-center text-sm'>
