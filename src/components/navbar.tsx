@@ -43,8 +43,11 @@ const Navbar = async () => {
           </SheetTrigger>
           <SheetContent side={'left'} className={`bg-[#222529] border-0 w-[90%]`}>
             <SheetHeader className={`text-left`}>
-              <SheetTitle>
+              <SheetTitle className={`flex flex-row items-center gap-4 md:flex-none`}>
                 <h1 className={`${poppins.className} text-primary font-semibold text-h3`}>Markit</h1>
+                <div className={`md:hidden`}>
+                  <Link href={`/signin`}>Sign in</Link> | <Link href={`/signup`}>Register</Link>
+                </div>
               </SheetTitle>
             </SheetHeader>
             <div>
@@ -131,7 +134,7 @@ const Navbar = async () => {
           + Create post
         </Link>
         {!data.user ? (
-          <div className={`text-[14px]`}>
+          <div className={`hidden md:block text-[14px]`}>
             <Link href={`/signin`}>Sign in</Link> | <Link href={`/signup`}>Register</Link>
           </div>
         ) : (

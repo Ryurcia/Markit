@@ -13,9 +13,9 @@ import { useToast } from '@/components/ui/use-toast';
 const SaleFormSchema = Yup.object().shape({
   title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
   description: Yup.string().max(250, 'Description is too long'),
-  price: Yup.number().required('Price is required').typeError('Must be a number').max(20000, 'Max price exceeded'),
+  price: Yup.number().required('Price is required').typeError('Must be a number').max(500000, 'Max price exceeded'),
   email: Yup.string().email('Invalid email'),
-  telNo: Yup.number().typeError('Must be a number').max(9000000000, 'Not a phone no'),
+  telNo: Yup.number().typeError('Must be a number').max(9990000000, 'Not a phone no'),
   condition: Yup.string(),
   tag: Yup.string(),
 });
@@ -66,7 +66,7 @@ const SaleForm = () => {
               {
                 title: values.title,
                 description: values.description,
-                price: (Math.round(Number(values.price) * 100) / 100).toFixed(2),
+                price: Number(values.price).toFixed(2),
                 tag: values.tag,
                 condition: values.condition,
                 post_author: userId,

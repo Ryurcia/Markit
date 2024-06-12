@@ -24,6 +24,7 @@ const config = {
       accent1: '#F1C40F',
       accent2: '#E74C3C',
       dark: '#424242',
+      dark2: '#17191c',
     },
     container: {
       center: true,

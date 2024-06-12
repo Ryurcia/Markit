@@ -1,7 +1,9 @@
+import SaleSection from './(sub-components)/SaleSection';
+
 const page = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className={`w-full px-[16px] md:w-[95%] md:mx-auto md:px-0`}>
+      <SaleSection />
     </div>
   );
 };
