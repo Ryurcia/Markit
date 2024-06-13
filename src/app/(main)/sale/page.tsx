@@ -24,8 +24,8 @@ const page = async ({ searchParams }: { searchParams: { pid: string } }) => {
       {/* Data */}
       <div className={`flex flex-col gap-[32px] lg:grid lg:grid-rows-3 lg:gap-3 lg:items-center`}>
         <div>
-          <h1 className={`${poppins.className} font-semibold text-h1`}>{productData.data.title}</h1>
-          <Badge className={`mb-[8px] rounded bg-primary border-0`}>{productData.data.tag}</Badge>
+          <h1 className={`${poppins.className} font-semibold text-h2`}>{productData.data.title}</h1>
+          <Badge className={`mb-[8px] rounded bg-primary border-0 text-sm`}>{productData.data.tag}</Badge>
           <p>
             <Link className={`underline`} href={`/profile?uid=${productData.data.post_author}`}>
               @{productData.data.post_author_username}
@@ -36,14 +36,14 @@ const page = async ({ searchParams }: { searchParams: { pid: string } }) => {
         </div>
 
         <div>
-          <h1 className={`${poppins.className} text-sub font-semibold mb-3`}>Product Description:</h1>
-          <p className={`${hind.className} font-light text-[20px] mb-3`}>{productData.data.description}</p>
+          <h1 className={`${poppins.className} text-base font-semibold mb-3`}>Product Description:</h1>
+          <p className={`${hind.className} font-light text-[16px] mb-3`}>{productData.data.description}</p>
           <p>Condition: {productData.data.condition}</p>
         </div>
 
         <div className={`self-start flex items-center gap-3`}>
-          <button className={`bg-primary py-[10px] px-[35px] rounded `}>Claim</button>
-          <FaRegBookmark fontSize={38} />
+          <button className={`bg-primary py-[5px] px-[30px] rounded `}>Claim</button>
+          <FaRegBookmark fontSize={30} />
         </div>
       </div>
     </div>
