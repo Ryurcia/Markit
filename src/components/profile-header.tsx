@@ -54,6 +54,8 @@ const ProfileHeader = async ({ user_id }: { user_id: string }) => {
         </div>
         {!user ? (
           ''
+        ) : user_id !== user.id ? (
+          ''
         ) : (
           <Link
             href={`/profile/settings`}
