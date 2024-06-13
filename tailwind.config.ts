@@ -94,6 +94,26 @@ const config = {
             'background-image': 'linear-gradient(to bottom right, rgba(46, 204, 113, 0.8), rgba(32, 178, 170, 0.8))',
           },
         },
+        'tranquil-forest': {
+          '0%': {
+            'background-size': '500% 90%',
+            'background-position': 'top left',
+            'background-image':
+              'linear-gradient(to right, rgba(46, 204, 113, 0.8), rgba(23, 25, 28, 0.8), rgba(164, 209, 255, 0.8))',
+          },
+          '50%': {
+            'background-size': '500% 90%',
+            'background-position': 'bottom right',
+            'background-image':
+              'linear-gradient(to right, rgba(164, 209, 255, 0.8), rgba(23, 25, 28, 0.8), rgba(46, 204, 113, 0.8))',
+          },
+          '100%': {
+            'background-size': '500% 90%',
+            'background-position': 'top left',
+            'background-image':
+              'linear-gradient(to right, rgba(46, 204, 113, 0.8), rgba(23, 25, 28, 0.8), rgba(164, 209, 255, 0.8))',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -101,6 +121,7 @@ const config = {
         'green-dream': 'green-dream 8s ease infinite',
         'gray-fluff': 'gray-fluff 8s ease infinite',
         'diagonal-green-wave': 'diagonal-green-wave 8s ease-in-out infinite',
+        'tranquil-forest': 'tranquil-forest 5s ease infinite',
       },
     },
   },

@@ -26,7 +26,7 @@ const ProductCard = ({ props }: { props: ProductCardProps }) => {
   }, []);
 
   return (
-    <Card className={`w-[300px] h-[400px] grid rounded bg-dark2 border-[1px] border-dark`}>
+    <Card className={`w-[300px] h-[400px] grid rounded bg-dark2 border-[1px] border-[#ffffff15]`}>
       <CardHeader className={`w-full p-0`}>
         <AspectRatio ratio={16 / 12}>
           <Image

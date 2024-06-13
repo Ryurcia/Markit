@@ -1,8 +1,11 @@
+import { poppins } from '@/utils/font.config';
 import SaleSection from './(sub-components)/SaleSection';
+import SearchSection from './(sub-components)/SearchSection';
 
 const page = () => {
   return (
-    <div className={`w-full px-[16px] md:w-[95%] md:mx-auto md:px-0`}>
+    <div className={`w-full pb-5`}>
+      <SearchSection />
       <SaleSection />
     </div>
   );
