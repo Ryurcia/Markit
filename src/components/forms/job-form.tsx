@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 
 const JobFormSchema = Yup.object().shape({
-  job_title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
+  title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
   job_desc: Yup.string().max(250, 'Description is too long'),
   pay: Yup.number().required('Pay is required').typeError('Must be a number').max(500000, 'Max price exceeded'),
   company_name: Yup.string().max(50, 'Too Long'),
@@ -48,7 +48,7 @@ const JobForm = () => {
     <div className={`w-full`}>
       <Formik
         initialValues={{
-          job_title: '',
+          title: '',
           job_desc: '',
           pay: '',
           company_name: '',
@@ -60,7 +60,7 @@ const JobForm = () => {
           const supabase = createClient();
           await supabase.from('Job_Post').insert([
             {
-              job_title: values.job_title,
+              job_title: values.title,
               job_desc: values.job_desc,
               company_name: values.company_name,
               pay: (Math.round(Number(values.pay) * 100) / 100).toFixed(2),
@@ -81,10 +81,10 @@ const JobForm = () => {
         {({ errors, touched }) => (
           <Form className={`flex flex-col items-start gap-4`}>
             <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='job_title'>
+              <label className={`${poppins.className} text-sub font-medium`} htmlFor='title'>
                 Job title <span className={`font-light text-sm block`}>*required</span>
               </label>
-              <Field className={`text-dark p-[10px] rounded max-w-[500px]`} name='job_title' />
+              <Field className={`text-dark p-[10px] rounded max-w-[500px]`} name='title' />
               <ErrorMessage name='job_title' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
             </div>
 
