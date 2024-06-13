@@ -5,14 +5,6 @@ const page = async ({ searchParams }: { searchParams: { uid: string } }) => {
   const supabase = createClient();
   let userId = searchParams.uid;
 
-  if (!searchParams) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    userId = user?.id!;
-  }
-
   return (
     <div>
       <ProfileHeader user_id={userId} />

@@ -13,14 +13,16 @@ const page = async ({ searchParams }: { searchParams: { pid: string } }) => {
     .publicUrl;
 
   return (
-    <div className={`p-[16px] md:p-0 md:w-[95%] md:mx-auto grid grid-cols-2 gap-5 items-center mt-[64px]`}>
+    <div
+      className={`p-[16px] md:p-0 md:w-[95%] md:mx-auto flex flex-col justify-center gap-5 lg:grid lg:grid-cols-2 lg:gap-5 items-center mt-[64px]`}
+    >
       {/* IMAGE */}
-      <div className={`max-w-[700px] max-h-[700px] justify-self-center self-start`}>
+      <div className={`max-w-[700px] max-h-[700px] justify-self-center self-center lg:self-start`}>
         <Image src={productImage} width={700} height={700} alt={productData.data.title} className={`object-cover`} />
       </div>
 
       {/* Data */}
-      <div className={`grid grid-rows-3 gap-3 items-center`}>
+      <div className={`flex flex-col gap-[32px] lg:grid lg:grid-rows-3 lg:gap-3 lg:items-center`}>
         <div>
           <h1 className={`${poppins.className} font-semibold text-h1`}>{productData.data.title}</h1>
           <Badge className={`mb-[8px] rounded bg-primary border-0`}>{productData.data.tag}</Badge>

@@ -102,7 +102,7 @@ const Navbar = async () => {
                       Your Profile
                     </AccordionTrigger>
                     <AccordionContent className={`flex flex-col`}>
-                      <Link href={'/profile'} className={`p-[10px] text-base `}>
+                      <Link href={`/profile?uid=${data.user.id}`} className={`p-[10px] text-base `}>
                         Profile
                       </Link>
                       <Link href={'/'} className={`p-[10px] text-base `}>
@@ -161,7 +161,10 @@ const Navbar = async () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className={`mt-[20px] rounded bg-dark border-0`}>
                 <DropdownMenuItem>
-                  <Link href={'/profile'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                  <Link
+                    href={`/profile?uid=${data.user.id}`}
+                    className={`flex flex-row items-center gap-[5px] text-base`}
+                  >
                     <IoPersonCircle /> Profile
                   </Link>
                 </DropdownMenuItem>

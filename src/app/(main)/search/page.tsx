@@ -34,7 +34,7 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
       <h1 className={`${poppins.className} font-semibold text-h3`}>
         We found {data?.length} result(s) that match '{q}'
       </h1>
-      <div>
+      <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
         {data?.map((res) => {
           const cardProps = {
             id: res.id,
