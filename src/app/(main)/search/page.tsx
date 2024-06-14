@@ -43,7 +43,7 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
             condition: res.condition,
             tag: res.tag,
           };
-          return <ProductCard props={cardProps} />;
+          return <ProductCard key={res.id} props={cardProps} />;
         })}
       </div>
     </div>

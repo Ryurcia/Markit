@@ -31,7 +31,7 @@ const SearchSection = () => {
         <div className={`w-full relative`}>
           <input
             type='text'
-            placeholder='Bicycle'
+            placeholder='What are you looking for...'
             onChange={(e) => setSearchInput(e.target.value)}
             className={`${poppins.className} w-full p-4 rounded text-dark2`}
           />
