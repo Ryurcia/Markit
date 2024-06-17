@@ -5,6 +5,8 @@ import { FaRegBookmark } from 'react-icons/fa';
 import Image from 'next/image';
 import moment from 'moment';
 import Link from 'next/link';
+import { getAllProducts } from '@/lib/supabase/products/productFunctions';
+import ProductCard from '@/components/product-card';
 
 const page = async ({ searchParams }: { searchParams: { pid: string } }) => {
   const supabase = createClient();
@@ -12,7 +14,26 @@ const page = async ({ searchParams }: { searchParams: { pid: string } }) => {
   const productImage = await supabase.storage.from('sale').getPublicUrl(`public/sale_${searchParams.pid}`).data
     .publicUrl;
 
-  return (
+  //All Products
+  const allProducts = await getAllProducts();
+
+  return !searchParams.pid ? (
+    <div className={`mt-[32px] p-[16px] md:p-0 md:w-[95%] md:mx-auto`}>
+      <h1 className={`${poppins.className} mb-3 text-h2 font-semibold  lg:text-h1`}>For Sale</h1>
+      <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
+        {allProducts.map((res) => {
+          const cardProps = {
+            id: res.id,
+            title: res.title,
+            price: res.price,
+            condition: res.condition,
+            tag: res.tag,
+          };
+          return <ProductCard key={res.id} props={cardProps} />;
+        })}
+      </div>
+    </div>
+  ) : (
     <div
       className={`p-[16px] md:p-0 md:w-[95%] md:mx-auto flex flex-col justify-center gap-5 lg:grid lg:grid-cols-2 lg:gap-5 items-center mt-[64px]`}
     >

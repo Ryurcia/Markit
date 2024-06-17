@@ -1,23 +1,23 @@
 const SalesCat = [
   {
     title: 'All',
-    link: '/sales/all',
+    link: '/sale/all',
   },
   {
     title: 'Antiques',
-    link: '/sales/Antiques',
+    link: '/sale/Antiques',
   },
   {
-    title: 'Arts & Crafts',
-    link: '/sales/arts',
+    title: 'Arts & crafts',
+    link: '/sale/Arts',
   },
   {
     title: 'Appliances',
-    link: '/sales/Appliances',
+    link: '/sale/Appliances',
   },
   {
-    title: 'Auto Parts',
-    link: '/sales/autoparts',
+    title: 'Auto',
+    link: '/sale/Auto',
   },
   {
     title: 'Books',
@@ -33,27 +33,27 @@ const SalesCat = [
   },
   {
     title: 'General',
-    link: '/sales/General',
+    link: '/sale/General',
   },
   {
     title: 'Tools',
-    link: '/sales/Tools',
+    link: '/sale/Tools',
   },
   {
     title: 'Music',
-    link: '/sales/Music',
+    link: '/sale/Music',
   },
   {
     title: 'Jewelery',
-    link: '/sales/Jewelery',
+    link: '/sale/Jewelery',
   },
   {
     title: 'Clothes',
-    link: '/sales/Clothes',
+    link: '/sale/Clothes',
   },
   {
     title: 'Electronics',
-    link: '/sales/Electronics',
+    link: '/sale/Electronics',
   },
 ];
 const JobsCat = [
