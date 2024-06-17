@@ -10,8 +10,17 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
   const cat = searchParams.cat;
   let dbTable = '';
 
-  if (cat === 'Sale') dbTable = 'Sale_Post';
-  if (cat === 'Job') dbTable = 'Job_Post';
+  switch (cat) {
+    case 'Sale':
+      dbTable = 'Sale_Post';
+      break;
+    case 'Job':
+      dbTable = 'Job_Post';
+      break;
+    default:
+      dbTable = 'Sale_Post';
+      break;
+  }
 
   const supabase = createClient();
 
@@ -27,7 +36,6 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
 
   const { data, error } = await supabase.from(dbTable).select().textSearch('title', `${query}`);
 
-  console.log(data);
   return !q ? (
     <div className={`px-[16px] md:px-0 md:w-[95%] md:mx-auto`}>
       <h1>No query provided</h1>
