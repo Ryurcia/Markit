@@ -1,6 +1,9 @@
-import ProductCard from '@/components/product-card';
 import { poppins } from '@/utils/font.config';
 import { createClient } from '@/utils/supabase/server';
+import dynamic from 'next/dynamic';
+
+const JobCard = dynamic(() => import('@/components/job-card'));
+const ProductCard = dynamic(() => import('@/components/product-card'));
 
 const page = async ({ searchParams }: { searchParams: { q: string; cat: string } }) => {
   const q = searchParams.q;
@@ -34,18 +37,38 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
       <h1 className={`${poppins.className} font-semibold text-h3`}>
         We found {data?.length} result(s) that match '{q}'
       </h1>
-      <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
-        {data?.map((res) => {
-          const cardProps = {
-            id: res.id,
-            title: res.title,
-            price: res.price,
-            condition: res.condition,
-            tag: res.tag,
-          };
-          return <ProductCard key={res.id} props={cardProps} />;
-        })}
-      </div>
+      {/* Sale */}
+      {cat === 'Sale' && (
+        <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
+          {data?.map((res) => {
+            const cardProps = {
+              id: res.id,
+              title: res.title,
+              price: res.price,
+              condition: res.condition,
+              tag: res.tag,
+            };
+            return <ProductCard key={res.id} props={cardProps} />;
+          })}
+        </div>
+      )}
+
+      {/* Job */}
+      {cat === 'Job' && (
+        <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
+          {data?.map((res) => {
+            const cardProps = {
+              id: res.id,
+              title: res.title,
+              pay: res.pay,
+              company: res.company_name,
+              tag: res.tag,
+              created_at: res.created_at,
+            };
+            return <JobCard key={res.id} props={cardProps} />;
+          })}
+        </div>
+      )}
     </div>
   );
 };

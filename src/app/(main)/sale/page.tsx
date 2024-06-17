@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { hind, poppins } from '@/utils/font.config';
 import { createClient } from '@/utils/supabase/server';
-import { FaRegBookmark, FaBookmark } from 'react-icons/fa';
+import { FaRegBookmark } from 'react-icons/fa';
 import Image from 'next/image';
 import moment from 'moment';
 import Link from 'next/link';
