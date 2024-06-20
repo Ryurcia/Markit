@@ -3,24 +3,24 @@ import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { poppins } from '@/utils/font.config';
 import { Textarea } from '@/components/ui/textarea';
-import { SalesCat } from '@/utils/categories';
+import { ServicesCat } from '@/utils/categories';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 
-const SaleFormSchema = Yup.object().shape({
+const ServiceFormSchema = Yup.object().shape({
   title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
   description: Yup.string().max(250, 'Description is too long'),
   price: Yup.number().required('Price is required').typeError('Must be a number').max(500000, 'Max price exceeded'),
+  pay_by: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email'),
   telNo: Yup.number().typeError('Must be a number').max(9990000000, 'Not a phone no'),
-  condition: Yup.string(),
   tag: Yup.string(),
 });
 
-const SaleForm = () => {
+const ServiceForm = () => {
   const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
 
@@ -53,22 +53,25 @@ const SaleForm = () => {
           description: '',
           price: '',
           email: '',
-          tag: SalesCat[1].title,
+          tag: ServicesCat[1].title,
           telNo: '',
-          condition: 'New',
+          pay_by: 'hourly',
         }}
-        validationSchema={SaleFormSchema}
+        validationSchema={ServiceFormSchema}
         onSubmit={async (values) => {
+            console.log('Submit')
           const supabase = createClient();
           const { data } = await supabase
-            .from('Sale_Post')
+            .from('Service_Post')
             .insert([
               {
                 title: values.title,
                 description: values.description,
                 price: Number(values.price).toFixed(2),
+                email:values.email,
+                tel_no:values.telNo,
                 tag: values.tag,
-                condition: values.condition,
+                pay_by: values.pay_by,
                 post_author: userId,
                 post_author_username: username,
               },
@@ -147,14 +150,20 @@ const SaleForm = () => {
 
             <div className={`w-full grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='condition'>
-                Condition
+                Rate
               </label>
-              <Field className={`w-[180px] text-dark p-[10px] rounded`} name='condition' as='select'>
-                <option className={`text-dark`} value='New'>
-                  New
+              <Field className={`w-[180px] text-dark p-[10px] rounded`} name='pay_by' as='select'>
+                <option className={`text-dark`} value='hourly'>
+                  Hourly
                 </option>
-                <option value='Used' className={`text-dark`}>
-                  Used
+                <option value='monthly' className={`text-dark`}>
+                  Monthly
+                </option>
+                <option value='one_time' className={`text-dark`}>
+                  One time payment
+                </option>
+                <option value='contact_me' className={`text-dark`}>
+                  Contact me
                 </option>
               </Field>
             </div>
@@ -164,7 +173,7 @@ const SaleForm = () => {
                 Tag
               </label>
               <Field className={`w-[180px] text-dark p-[10px] rounded`} name='tag' as='select'>
-                {SalesCat.slice(1).map((cat, index) => {
+                {ServicesCat.slice(1).map((cat, index) => {
                   return (
                     <option className={`text-dark hover:bg-primary`} key={index} value={cat.title}>
                       {cat.title}
@@ -176,9 +185,9 @@ const SaleForm = () => {
 
             <div className={`w-full grid gap-2 items-center`}>
               <label className={`${poppins.className} text-sub font-medium`} htmlFor='images'>
-                Images
+                Service Banner/Logo
               </label>
-              <input ref={imagesRef} className='max-w-[500px]' type='file' accept='image/*' required />
+              <input ref={imagesRef} className='max-w-[500px]' type='file' accept='image/*' />
             </div>
 
             <button className={`w-full bg-primary py-[15px] rounded text-base font-semibold`} type='submit'>
@@ -194,4 +203,4 @@ const SaleForm = () => {
   );
 };
 
-export default SaleForm;
+export default ServiceForm;

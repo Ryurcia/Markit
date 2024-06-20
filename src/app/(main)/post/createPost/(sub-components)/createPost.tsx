@@ -18,6 +18,10 @@ const JobForm = dynamic(() => import('@/components/forms/job-form'), {
   loading: () => <h1>LOADING</h1>,
 });
 
+const ServiceForm = dynamic(() => import('@/components/forms/service-form'), {
+  loading: () => <h1>LOADING</h1>,
+});
+
 enum FormType {
   SALE = 'Sale',
   JOB = 'Job',
@@ -67,7 +71,7 @@ const CreatePost = () => {
       <div className={`w-full`}>
         {formType === FormType.SALE && <SaleForm />}
         {formType === FormType.JOB && <JobForm />}
-        {formType === FormType.SERVICE && <h1>Service</h1>}
+        {formType === FormType.SERVICE && <ServiceForm/>}
       </div>
     </div>
   );

@@ -17,8 +17,8 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
     case 'Job':
       dbTable = 'Job_Post';
       break;
-    default:
-      dbTable = 'Sale_Post';
+    case 'Service':
+      dbTable = 'Service_Post';
       break;
   }
 
