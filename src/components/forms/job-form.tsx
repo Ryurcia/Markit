@@ -61,7 +61,7 @@ const JobForm = () => {
           const supabase = createClient();
           await supabase.from('Job_Post').insert([
             {
-              job_title: values.title,
+              title: values.title,
               job_desc: values.job_desc,
               company_name: values.company_name,
               pay: (Math.round(Number(values.pay) * 100) / 100).toFixed(2),
@@ -131,7 +131,9 @@ const JobForm = () => {
                 <label className={`${poppins.className} text-sub font-medium`} htmlFor='requirements'>
                   Job requirements
                 </label>
-                <p className={`text-sm opacity-50`}>*List things you are looking for in a candidate</p>
+                <p className={`text-sm opacity-50`}>
+                  *Seperate with a comma e.g "Knows HTML, Bachelors Degree, etc..."
+                </p>
               </div>
               <div>
                 <Field className={`text-dark p-[10px] rounded md:w-[300px]`} name='requirements' as={Textarea} />

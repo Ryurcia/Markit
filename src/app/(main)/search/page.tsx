@@ -1,3 +1,4 @@
+import ServiceCard from '@/components/service-card';
 import { poppins } from '@/utils/font.config';
 import { createClient } from '@/utils/supabase/server';
 import dynamic from 'next/dynamic';
@@ -18,7 +19,7 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
       dbTable = 'Job_Post';
       break;
     default:
-      dbTable = 'Sale_Post';
+      dbTable = 'Service_Post';
       break;
   }
 
@@ -74,6 +75,24 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
               created_at: res.created_at,
             };
             return <JobCard key={res.id} props={cardProps} />;
+          })}
+        </div>
+      )}
+
+      {/* Job */}
+      {cat === 'Service' && (
+        <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
+          {data?.map((res) => {
+            const cardProps = {
+              id: res.id,
+              title: res.title,
+              company: res.company_name,
+              tag: res.tag,
+              created_at: res.created_at,
+              price: res.price,
+              pay_by: res.pay_by,
+            };
+            return <ServiceCard props={cardProps} />;
           })}
         </div>
       )}
