@@ -9,6 +9,7 @@ import { createClient } from '@/utils/supabase/client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
+import { Separator } from '../ui/separator';
 
 const SaleFormSchema = Yup.object().shape({
   title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
@@ -95,61 +96,100 @@ const SaleForm = () => {
       >
         {({ errors, touched }) => (
           <Form className={`flex flex-col items-start gap-4`}>
-            <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='title'>
-                Title
-              </label>
-              <Field className={`text-dark p-[10px] rounded max-w-[500px]`} name='title' />
-              <ErrorMessage name='title' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='title'>
+                  Title
+                </label>
+                <p className={`text-sm opacity-50`}>*Short title for product you are selling</p>
+              </div>
+              <div>
+                <Field className={`text-dark p-[10px] rounded md:w-[300px]`} name='title' />
+                <ErrorMessage name='title' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
+              </div>
             </div>
 
-            <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='description'>
-                Description
-              </label>
-              <Field className={`text-dark p-[10px] rounded max-w-[500px]`} name='description' as={Textarea} />
-              <ErrorMessage name='description' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
+            <Separator className={`bg-dark h-[1px]`} />
+
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='description'>
+                  Description
+                </label>
+                <p className={`text-sm opacity-50`}>Short description of product.</p>
+              </div>
+              <div>
+                <Field
+                  className={`text-dark p-[10px] rounded block w-full md:w-[300px]`}
+                  name='description'
+                  as={Textarea}
+                />
+                <ErrorMessage name='description' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
+              </div>
             </div>
 
-            <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='email'>
-                Contact info *optional
-              </label>
-              <div className={`grid gap-2`}>
-                <div className={`grid grid-row-2`}>
-                  <label htmlFor='email'>Email</label>
-                  <Field
-                    className={`text-dark p-[10px] rounded max-w-[500px]`}
-                    name='email'
-                    placeholder='johndoe@email.com'
-                  />
-                  <ErrorMessage name='email' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
-                </div>
+            <Separator className={`bg-dark h-[1px]`} />
 
-                <div className={`grid grid-row-2`}>
-                  <label htmlFor='telNo'>Cell no.</label>
-                  <Field
-                    className={`text-dark p-[10px] rounded max-w-[500px]`}
-                    name='telNo'
-                    placeholder='xxx xxx xxx'
-                  />
-                  <ErrorMessage name='telNo' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='email'>
+                  Contact info
+                </label>
+                <p className={`text-sm opacity-50 w-[250px]`}>
+                  Enter additional contact info where customer may also reach you. This is optional
+                </p>
+              </div>
+              <div>
+                <div className={`grid gap-2`}>
+                  <div className={`grid grid-row-2`}>
+                    <label htmlFor='email'>Email</label>
+                    <Field
+                      className={`text-dark p-[10px] rounded  md:w-[300px]`}
+                      name='email'
+                      placeholder='johndoe@email.com'
+                    />
+                    <ErrorMessage name='email' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
+                  </div>
+
+                  <div className={`grid grid-row-2`}>
+                    <label htmlFor='telNo'>Cell no.</label>
+                    <Field
+                      className={`text-dark p-[10px] rounded md:w-[300px]`}
+                      name='telNo'
+                      placeholder='xxx xxx xxx'
+                    />
+                    <ErrorMessage name='telNo' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='price'>
-                Price
-              </label>
-              <Field className={`text-dark p-[10px] rounded w-[200px]`} name='price' placeholder='10000' />
-              <ErrorMessage name='price' render={(msg) => <p className={`text-accent2`}>{msg}</p>} />
+            <Separator className={`bg-dark h-[1px]`} />
+
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='price'>
+                  Price
+                </label>
+                <p className={`text-sm opacity-50 w-[250px]`}>*Set a price point for your item (USD)</p>
+              </div>
+              <div>
+                <Field className={`text-dark p-[10px] rounded md:w-[300px]`} name='price' placeholder='10000' />
+                <ErrorMessage name='price' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
+              </div>
             </div>
 
-            <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='condition'>
-                Condition
-              </label>
+            <Separator className={`bg-dark h-[1px]`} />
+
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='condition'>
+                  Condition
+                </label>
+                <p className={`text-sm opacity-50 w-[250px]`}>
+                  Select the option that best fits the condition of your item.
+                </p>
+              </div>
               <Field className={`w-[180px] text-dark p-[10px] rounded`} name='condition' as='select'>
                 <option className={`text-dark`} value='New'>
                   New
@@ -160,10 +200,17 @@ const SaleForm = () => {
               </Field>
             </div>
 
-            <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='tag'>
-                Tag
-              </label>
+            <Separator className={`bg-dark h-[1px]`} />
+
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='tag'>
+                  Tag
+                </label>
+                <p className={`text-sm opacity-50 w-[250px]`}>
+                  Select the tag that best fits your item. This will also help people search for your item
+                </p>
+              </div>
               <Field className={`w-[180px] text-dark p-[10px] rounded`} name='tag' as='select'>
                 {SalesCat.slice(1).map((cat, index) => {
                   return (
@@ -175,19 +222,26 @@ const SaleForm = () => {
               </Field>
             </div>
 
-            <div className={`w-full grid gap-2 items-center`}>
-              <label className={`${poppins.className} text-sub font-medium`} htmlFor='images'>
-                Images
-              </label>
+            <Separator className={`bg-dark h-[1px]`} />
+
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='images'>
+                  Images
+                </label>
+                <p className={`text-sm opacity-50 w-[250px]`}>*Upload an image of your item.</p>
+              </div>
               <input ref={imagesRef} className='max-w-[500px]' type='file' accept='image/*' required />
             </div>
 
-            <button className={`w-full bg-primary py-[15px] rounded text-base font-semibold`} type='submit'>
-              Post
-            </button>
-            <Link className={`w-full border-2 border-accent2 text-center p-[15px] rounded`} href={`/home`}>
-              Cancel
-            </Link>
+            <div className={`grid grid-rows-2 md:grid-cols-2 md:grid-rows-0 w-full gap-2`}>
+              <button className={`w-full bg-primary py-[15px] rounded text-base font-semibold`} type='submit'>
+                Post
+              </button>
+              <Link className={`w-full border-2 border-accent2 text-center p-[15px] rounded`} href={`/home`}>
+                Cancel
+              </Link>
+            </div>
           </Form>
         )}
       </Formik>
