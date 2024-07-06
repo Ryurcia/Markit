@@ -78,7 +78,6 @@ const SaleForm = () => {
 
           if (!data) throw 'No Post Created';
 
-          console.log(imagesRef.current?.files);
           //Upload Images
           if (imagesRef.current?.files) {
             const { error } = await supabase.storage

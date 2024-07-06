@@ -19,7 +19,7 @@ const page = async () => {
   if (user) return redirect('/home');
 
   return (
-    <div className={`${hind.className} relative`}>
+    <div className={`${hind.className} relative`}>  
       {/* NAVBAR */}
       <div className='w-[85%] sticky top-0 mx-auto flex flex-row items-center justify-between py-[20px] md:w-[95%]'>
         <div className={`flex flex-row items-center gap-[32px]`}>

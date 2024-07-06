@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { poppins } from '@/utils/font.config';
 import { Textarea } from '@/components/ui/textarea';
-import { JobsCat, SalesCat, ServicesCat } from '@/utils/categories';
+import { ServicesCat } from '@/utils/categories';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { useEffect, useRef, useState } from 'react';
