@@ -1,28 +1,31 @@
-import ProductCard from '@/components/product-card';
-import { getProductsFromCategory } from '@/lib/supabase/products/productFunctions';
+import ServiceCard from '@/components/service-card';
+import { getServicesFromCategory } from '@/lib/supabase/services/servicesFunctions';
+
 import { poppins } from '@/utils/font.config';
 
 const page = async ({ params }: { params: { category: string } }) => {
   const categoryFirstLetter = params.category[0].toUpperCase();
   const category = categoryFirstLetter + params.category.slice(1);
 
-  const products = await getProductsFromCategory(category);
+  const services = await getServicesFromCategory(category);
   return (
     <div className={`mt-[32px] p-[16px] md:p-0 md:w-[95%] md:mx-auto`}>
       <h1 className={`${poppins.className} mb-3 text-h2 font-semibold  lg:text-h1`}>{category}</h1>
       <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
-        {products?.length === 0 ? (
-          <div>No products posted</div>
+        {services?.length === 0 ? (
+          <div>No services posted</div>
         ) : (
-          products?.map((res) => {
+          services?.map((res) => {
             const cardProps = {
               id: res.id,
               title: res.title,
-              price: res.price,
-              condition: res.condition,
+              created_at: res.created_at,
+              company: res.company_name,
               tag: res.tag,
+              price: res.price,
+              pay_by: res.pay_by,
             };
-            return <ProductCard key={res.id} props={cardProps} />;
+            return <ServiceCard key={res.id} props={cardProps} />;
           })
         )}
       </div>

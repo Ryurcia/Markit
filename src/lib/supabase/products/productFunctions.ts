@@ -12,6 +12,12 @@ const getSaleProductsWithLimit = async (limit: number) => {
 
 const getProductsFromCategory = async (cat: string) => {
   const supabase = createClient();
+
+  if (cat === 'All') {
+    const { data } = await supabase.from('Sale_Post').select('*');
+    return data;
+  }
+
   const { data } = await supabase.from('Sale_Post').select('*').eq('tag', cat);
 
   if (!data || data.length < 0) return [];

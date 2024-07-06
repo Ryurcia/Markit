@@ -21,15 +21,15 @@ const SalesCat = [
   },
   {
     title: 'Books',
-    link: '/sales/Books',
+    link: '/sale/Books',
   },
   {
     title: 'Free',
-    link: '/sales/Free',
+    link: '/sale/Free',
   },
   {
     title: 'Furniture',
-    link: '/sales/Furniture',
+    link: '/sale/Furniture',
   },
   {
     title: 'General',
@@ -70,7 +70,7 @@ const JobsCat = [
     link: '/jobs/Accounting',
   },
   {
-    title: 'Software/IT',
+    title: 'Software',
     link: '/jobs/Software',
   },
   {
@@ -106,12 +106,12 @@ const JobsCat = [
     link: '/jobs/Transport',
   },
   {
-    title: 'Business/Management',
+    title: 'Business',
     link: '/jobs/Business',
   },
   {
     title: 'Customer service',
-    link: '/jobs/Customerservice',
+    link: '/jobs/Customer service',
   },
 ];
 const ServicesCat = [

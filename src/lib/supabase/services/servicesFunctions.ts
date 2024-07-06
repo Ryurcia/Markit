@@ -9,4 +9,18 @@ const getServiceData = async (sid: string) => {
   return data;
 };
 
-export { getServiceData };
+const getServicesFromCategory = async (cat: string) => {
+  const supabase = createClient();
+
+  if (cat === 'All') {
+    const { data } = await supabase.from('Service_Post').select('*');
+
+    return data;
+  }
+
+  const { data } = await supabase.from('Service_Post').select('*').eq('tag', cat);
+
+  return data;
+};
+
+export { getServiceData, getServicesFromCategory };

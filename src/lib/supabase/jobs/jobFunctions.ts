@@ -9,4 +9,18 @@ const getJobData = async (job_id: string) => {
   return data;
 };
 
-export { getJobData };
+const getJobsFromCategory = async (cat: string) => {
+  const supabase = createClient();
+
+  if (cat === 'All') {
+    const { data } = await supabase.from('Job_Post').select('*');
+
+    return data;
+  }
+
+  const { data } = await supabase.from('Job_Post').select('*').eq('tag', cat);
+
+  return data;
+};
+
+export { getJobData, getJobsFromCategory };
