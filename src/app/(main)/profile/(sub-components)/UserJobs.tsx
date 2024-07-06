@@ -3,7 +3,7 @@ import { createClient } from '@/utils/supabase/server';
 
 const UserJobs = async ({ userId }: { userId: string }) => {
   const supabase = createClient();
-  const { data } = await supabase.from('Job_Post').select('*').eq('post_author', userId);
+  const { data } = await supabase.from('Job_Post').select('*').eq('author_id', userId);
 
   return (
     <div className={`flex justify-start flex-wrap gap-3`}>
