@@ -1,14 +1,19 @@
+import BookmarkButton from '@/components/bookmark-btn';
 import { getServiceData } from '@/lib/supabase/services/servicesFunctions';
 import Link from 'next/link';
 
-const page = async ({ searchParams }: { searchParams: { sid: string } }) => {
-  const params = searchParams.sid;
+const page = async ({ searchParams }: { searchParams: { id: string } }) => {
+  const params = searchParams.id;
   const serviceData = await getServiceData(params);
 
   return (
     <div className={`px-[16px] mt-[32px] md:w-[95%] md:mx-auto md:px-0 grid grid-rows-3 gap-2 items-center`}>
       <div>
-        <h1 className={`text-h2 font-semibold`}>{serviceData.title}</h1>
+        <div className={`flex gap-4 items-center`}>
+          <h1 className={`text-h2 font-semibold`}>{serviceData.title}</h1>
+          <BookmarkButton cat={'services'} id={serviceData.id} title={serviceData.title}/>
+        </div>
+
         <h2 className={`text-h3`}>{serviceData.company_name}</h2>
         <p className={`mt-2`}>
           Posted by{' '}

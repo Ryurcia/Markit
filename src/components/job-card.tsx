@@ -13,7 +13,7 @@ interface JobCardProps {
 
 const JobCard = ({ props }: { props: JobCardProps }) => {
   return (
-    <Link href={`/jobs?jid=${props.id}`}>
+    <Link href={`/jobs?id=${props.id}`}>
       <div className={`bg-dark w-[300px] p-3 rounded hover:border-[1px] hover:border-primary`}>
         <div className={`flex items-center justify-between`}>
           <h1 className={`truncate`}>{props.title}</h1>

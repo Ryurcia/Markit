@@ -1,23 +1,23 @@
 import { Badge } from '@/components/ui/badge';
 import { hind, poppins } from '@/utils/font.config';
 import { createClient } from '@/utils/supabase/server';
-import { FaRegBookmark } from 'react-icons/fa';
 import Image from 'next/image';
 import moment from 'moment';
 import Link from 'next/link';
 import { getAllProducts } from '@/lib/supabase/products/productFunctions';
 import ProductCard from '@/components/product-card';
+import BookmarkButton from '@/components/bookmark-btn';
 
-const page = async ({ searchParams }: { searchParams: { pid: string } }) => {
+const page = async ({ searchParams }: { searchParams: { id: string } }) => {
   const supabase = createClient();
-  const productData = await supabase.from('Sale_Post').select('*').eq('id', searchParams.pid).limit(1).single();
-  const productImage = await supabase.storage.from('sale').getPublicUrl(`public/sale_${searchParams.pid}`).data
+  const productData = await supabase.from('Sale_Post').select('*').eq('id', searchParams.id).limit(1).single();
+  const productImage = await supabase.storage.from('sale').getPublicUrl(`public/sale_${searchParams.id}`).data
     .publicUrl;
 
   //All Products
   const allProducts = await getAllProducts();
 
-  return !searchParams.pid ? (
+  return !searchParams.id ? (
     <div className={`mt-[32px] p-[16px] md:p-0 md:w-[95%] md:mx-auto`}>
       <h1 className={`${poppins.className} mb-3 text-h2 font-semibold  lg:text-h1`}>For Sale</h1>
       <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
@@ -64,7 +64,7 @@ const page = async ({ searchParams }: { searchParams: { pid: string } }) => {
 
         <div className={`self-start flex items-center gap-3`}>
           <button className={`bg-primary py-[5px] px-[30px] rounded `}>Claim</button>
-          <FaRegBookmark fontSize={30} />
+          <BookmarkButton cat={'sale'} id={productData.data.id} title={productData.data.title}/>
         </div>
       </div>
     </div>

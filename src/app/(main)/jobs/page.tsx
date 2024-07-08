@@ -1,11 +1,12 @@
+import BookmarkButton from '@/components/bookmark-btn';
 import { Badge } from '@/components/ui/badge';
 import { getJobData } from '@/lib/supabase/jobs/jobFunctions';
 import { poppins } from '@/utils/font.config';
 import moment from 'moment';
 import Link from 'next/link';
 
-const page = async ({ searchParams }: { searchParams: { jid: string } }) => {
-  const params = searchParams.jid;
+const page = async ({ searchParams }: { searchParams: { id: string } }) => {
+  const params = searchParams.id;
   const jobData = await getJobData(params);
 
   const requirements = jobData.requirements.split(',');
@@ -13,7 +14,10 @@ const page = async ({ searchParams }: { searchParams: { jid: string } }) => {
     <div className={`px-[16px] mt-[32px] md:w-[95%] md:mx-auto md:px-0 grid grid-rows-2 gap-2 items-center`}>
       <div className={`flex flex-col gap-3`}>
         <div>
-          <h1 className={`${poppins.className} text-h3 font-semibold md:text-h2 lg:text-h1`}>{jobData.title}</h1>
+          <div className={`flex gap-4 items-center`}>
+            <h1 className={`${poppins.className} text-h3 font-semibold md:text-h2 lg:text-h1`}>{jobData.title}</h1>
+            <BookmarkButton cat={'jobs'} id={jobData.id} title={jobData.title} />
+          </div>
           <Badge className={`border-0 rounded bg-primary mb-3`}>{jobData.tag}</Badge>
           <p className={`opacity-50 text-[18px]`}>Salary ${jobData.pay}/year</p>
         </div>

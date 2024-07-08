@@ -14,7 +14,7 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ props }: { props: ServiceCardProps }) => {
   return (
-    <Link href={`/services?sid=${props.id}`}>
+    <Link href={`/services?id=${props.id}`}>
       <div
         className={`bg-dark w-[350px] h-[150px] flex flex-col justify-between p-3 rounded hover:border-[1px] hover:border-primary`}
       >
