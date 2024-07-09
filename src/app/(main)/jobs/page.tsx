@@ -16,7 +16,7 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
         <div>
           <div className={`flex gap-4 items-center`}>
             <h1 className={`${poppins.className} text-h3 font-semibold md:text-h2 lg:text-h1`}>{jobData.title}</h1>
-            <BookmarkButton cat={'jobs'} id={jobData.id} title={jobData.title} />
+            <BookmarkButton catType={'jobs'} id={jobData.id} title={jobData.title} />
           </div>
           <Badge className={`border-0 rounded bg-primary mb-3`}>{jobData.tag}</Badge>
           <p className={`opacity-50 text-[18px]`}>Salary ${jobData.pay}/year</p>

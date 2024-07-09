@@ -64,7 +64,7 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
 
         <div className={`self-start flex items-center gap-3`}>
           <button className={`bg-primary py-[5px] px-[30px] rounded `}>Claim</button>
-          <BookmarkButton cat={'sale'} id={productData.data.id} title={productData.data.title}/>
+          <BookmarkButton catType={'sale'} id={productData.data.id} title={productData.data.title} />
         </div>
       </div>
     </div>

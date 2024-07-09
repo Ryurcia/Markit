@@ -11,7 +11,7 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
       <div>
         <div className={`flex gap-4 items-center`}>
           <h1 className={`text-h2 font-semibold`}>{serviceData.title}</h1>
-          <BookmarkButton cat={'services'} id={serviceData.id} title={serviceData.title}/>
+          <BookmarkButton catType={'services'} id={serviceData.id} title={serviceData.title} />
         </div>
 
         <h2 className={`text-h3`}>{serviceData.company_name}</h2>
