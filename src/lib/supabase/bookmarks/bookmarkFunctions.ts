@@ -19,6 +19,14 @@ const createBookmark = async (catType: string, searchParams: string, title: stri
   return;
 };
 
+const getUserBookmarks = async (user_id: string) => {
+  const supabase = createClient();
+
+  const { data } = await supabase.from('Bookmarks').select('*').eq('user_id', user_id);
+
+  return data;
+};
+
 const checkIfUserBookmarked = async (id: string) => {
   const supabase = createClient();
   const {
@@ -42,4 +50,9 @@ const removeBookmark = async (id: string) => {
   return supabase.from('Bookmarks').delete().match({ item_id: id, user_id: user?.id });
 };
 
-export { createBookmark, checkIfUserBookmarked, removeBookmark };
+const deleteBookmark = async (bookmark_id: string) => {
+  const supabase = createClient();
+  await supabase.from('Bookmarks').delete().eq('bookmark_id', bookmark_id);
+};
+
+export { createBookmark, checkIfUserBookmarked, removeBookmark, getUserBookmarks, deleteBookmark };

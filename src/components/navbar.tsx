@@ -105,7 +105,7 @@ const Navbar = async () => {
                       <Link href={`/profile?uid=${data.user.id}`} className={`p-[10px] text-base `}>
                         Profile
                       </Link>
-                      <Link href={'/'} className={`p-[10px] text-base `}>
+                      <Link href={'/bookmarks'} className={`p-[10px] text-base `}>
                         Bookmarks
                       </Link>
                       <Link href={'/profile/settings'} className={`p-[10px] text-base `}>
@@ -169,7 +169,7 @@ const Navbar = async () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href={'/'} className={`flex flex-row items-center gap-[5px] text-base`}>
+                  <Link href={'/bookmarks'} className={`flex flex-row items-center gap-[5px] text-base`}>
                     <IoBookmarkSharp /> Bookmarked
                   </Link>
                 </DropdownMenuItem>
