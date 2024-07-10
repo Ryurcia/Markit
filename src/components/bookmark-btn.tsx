@@ -1,6 +1,6 @@
 'use client';
 
-import { checkIfUserBookmarked, createBookmark, removeBookmark } from '@/lib/supabase/bookmarks/bookmarkFunctions';
+import { checkIfUserBookmarked, createBookmark, deleteBookmark } from '@/lib/supabase/bookmarks/bookmarkFunctions';
 import { useEffect, useState, useTransition } from 'react';
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa';
 import { useToast } from '@/components/ui/use-toast';
@@ -22,7 +22,7 @@ const BookmarkButton = ({ catType, id, title }: { catType: string; id: string; t
       onClick={() => {
         startTransition(async () => {
           setIsBookmarked(false);
-          await removeBookmark(id);
+          await deleteBookmark(id);
         });
       }}
       fontSize={30}

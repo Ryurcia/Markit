@@ -41,18 +41,9 @@ const checkIfUserBookmarked = async (id: string) => {
   return !count || count <= 0 ? false : true;
 };
 
-const removeBookmark = async (id: string) => {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  return supabase.from('Bookmarks').delete().match({ item_id: id, user_id: user?.id });
-};
-
 const deleteBookmark = async (bookmark_id: string) => {
   const supabase = createClient();
   await supabase.from('Bookmarks').delete().eq('bookmark_id', bookmark_id);
 };
 
-export { createBookmark, checkIfUserBookmarked, removeBookmark, getUserBookmarks, deleteBookmark };
+export { createBookmark, checkIfUserBookmarked, getUserBookmarks, deleteBookmark };
