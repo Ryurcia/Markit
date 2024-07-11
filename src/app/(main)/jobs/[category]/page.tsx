@@ -11,7 +11,7 @@ const page = async ({ params }: { params: { category: string } }) => {
   return (
     <div className={`mt-[32px] p-[16px] md:p-0 md:w-[95%] md:mx-auto`}>
       <h1 className={`${poppins.className} mb-3 text-h2 font-semibold  lg:text-h1`}>{category}</h1>
-      <div className={`flex flex-wrap gap-5 justify-center md:justify-start`}>
+      <div className={`flex flex-wrap gap-5 justify-start`}>
         {jobs?.length === 0 ? (
           <div>No jobs posted</div>
         ) : (

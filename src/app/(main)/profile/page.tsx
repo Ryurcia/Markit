@@ -24,7 +24,7 @@ const page = async ({ searchParams }: { searchParams: { uid: string } }) => {
     <div>
       <ProfileHeader user_id={userId} />
       <div className={`flex justify-start`}>
-        <Tabs defaultValue='account' className='mt-3 ml-2 p-3 '>
+        <Tabs defaultValue='sales' className='mt-3 ml-2 p-3 '>
           <TabsList className={`bg-dark rounded h-[50px]`}>
             <TabsTrigger
               className={`text-[18px] ${poppins.className} data-[state=active]:bg-primary rounded`}

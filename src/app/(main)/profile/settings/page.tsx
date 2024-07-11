@@ -78,7 +78,7 @@ const page = () => {
               .update({ first_name: values.first_name, last_name: values.last_name, bio: values.bio })
               .eq('id', userId);
 
-            router.replace('/profile');
+            router.replace(`/profile?uid=${userId}`);
 
             return router.refresh();
           }}
