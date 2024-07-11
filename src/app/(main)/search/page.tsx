@@ -71,6 +71,7 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
               title: res.title,
               pay: res.pay,
               company: res.company_name,
+              desc: res.job_desc,
               tag: res.tag,
               created_at: res.created_at,
             };
@@ -88,6 +89,7 @@ const page = async ({ searchParams }: { searchParams: { q: string; cat: string }
               title: res.title,
               company: res.company_name,
               tag: res.tag,
+              desc: res.description,
               created_at: res.created_at,
               price: res.price,
               pay_by: res.pay_by,

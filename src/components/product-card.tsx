@@ -42,7 +42,7 @@ const ProductCard = ({ props }: { props: ProductCardProps }) => {
           </AspectRatio>
         </CardHeader>
         <CardContent className='p-[10px]'>
-          <h1 className={`text-[18px]`}>{props.title}</h1>
+          <h1 className={`text-[22px]`}>{props.title}</h1>
           <div className={`flex gap-2 mt-2`}>
             <Badge className={`${hind.className} bg-primary border-0 rounded font-light text-sm`}>
               {props.condition}
@@ -51,7 +51,7 @@ const ProductCard = ({ props }: { props: ProductCardProps }) => {
           </div>
         </CardContent>
         <CardFooter className={`p-[10px] flex flex-row items-center justify-between`}>
-          <p className={`block`}>${props.price}</p>
+          <p className={`block text-[20px] font-medium`}>${props.price}</p>
           <button className={`${hind.className} bg-primary py-[3px] px-[15px] rounded font-light`}>Claim</button>
         </CardFooter>
       </Card>

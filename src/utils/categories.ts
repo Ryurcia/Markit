@@ -120,15 +120,15 @@ const ServicesCat = [
     link: '/services/All',
   },
   {
-    title: 'Beauty/Wellness',
+    title: 'Beauty',
     link: '/services/Beauty',
   },
   {
-    title: 'Cell/Mobile',
+    title: 'Cell',
     link: '/services/Cell',
   },
   {
-    title: 'Computer/IT',
+    title: 'Computer',
     link: '/services/Computer',
   },
   {
@@ -140,7 +140,7 @@ const ServicesCat = [
     link: '/services/Events',
   },
   {
-    title: 'Labor/move',
+    title: 'Labor',
     link: '/services/Labor',
   },
   {

@@ -21,6 +21,7 @@ const page = async ({ params }: { params: { category: string } }) => {
               title: res.title,
               created_at: res.created_at,
               company: res.company_name,
+              desc: res.description,
               tag: res.tag,
               price: res.price,
               pay_by: res.pay_by,
