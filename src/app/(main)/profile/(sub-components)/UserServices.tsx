@@ -14,6 +14,7 @@ const UserServices = async ({ userId }: { userId: string }) => {
           created_at: res.created_at,
           company: res.company_name,
           tag: res.tag,
+          desc: res.description,
           price: res.price,
           pay_by: res.pay_by,
         };
