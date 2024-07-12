@@ -62,11 +62,11 @@ const JobsCat = [
     link: '/jobs/All',
   },
   {
-    title: 'Sales/Marketing',
+    title: 'Sales',
     link: '/jobs/Sales',
   },
   {
-    title: 'Accounting/Finance',
+    title: 'Accounting',
     link: '/jobs/Accounting',
   },
   {

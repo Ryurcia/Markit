@@ -54,7 +54,7 @@ const ProductCard = ({ props }: { props: ProductCardProps }) => {
         </CardContent>
         <CardFooter className={`p-[10px] flex flex-row items-center justify-between`}>
           <p className={`block text-[20px] font-medium`}>${props.price}</p>
-          <button className={`${hind.className} bg-primary py-[3px] px-[15px] rounded font-light`}>Claim</button>
+          <button className={`${hind.className} bg-primary py-[3px] px-[15px] rounded font-light`}>View</button>
         </CardFooter>
       </Card>
     </Link>

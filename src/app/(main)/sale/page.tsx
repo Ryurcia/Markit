@@ -1,4 +1,5 @@
 import { Badge } from '@/components/ui/badge';
+
 import { hind, poppins } from '@/utils/font.config';
 import { createClient } from '@/utils/supabase/server';
 import Image from 'next/image';
@@ -7,9 +8,22 @@ import Link from 'next/link';
 import { getAllProducts } from '@/lib/supabase/products/productFunctions';
 import ProductCard from '@/components/product-card';
 import BookmarkButton from '@/components/bookmark-btn';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import SaleEditForm from './(sub-components)/SaleEditForm';
 
 const page = async ({ searchParams }: { searchParams: { id: string } }) => {
   const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const currUserId = user ? user.id : '';
   const productData = await supabase.from('Sale_Post').select('*').eq('id', searchParams.id).limit(1).single();
   const productImage = await supabase.storage.from('sale').getPublicUrl(`public/sale_${searchParams.id}`).data
     .publicUrl;
@@ -63,7 +77,28 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
         </div>
 
         <div className={`self-start flex items-center gap-3`}>
-          <button className={`bg-primary py-[5px] px-[30px] rounded `}>Claim</button>
+          {productData.data.post_author === currUserId ? (
+            <Dialog modal={false}>
+              <DialogTrigger className={`px-[25px] py-[8px] bg-primary text-neutral rounded`}>Edit</DialogTrigger>
+              <DialogContent className={`bg-dark rounded`}>
+                <DialogHeader>
+                  <DialogTitle>Edit Post</DialogTitle>
+                  <DialogDescription>Edit your post</DialogDescription>
+                </DialogHeader>
+                <SaleEditForm
+                  props={{
+                    product_id: productData.data.id,
+                    title: productData.data.title,
+                    description: productData.data.description,
+                    price: productData.data.price,
+                  }}
+                />
+              </DialogContent>
+            </Dialog>
+          ) : (
+            <button className={`bg-primary py-[5px] px-[30px] rounded `}>Claim</button>
+          )}
+
           <BookmarkButton catType={'sale'} id={productData.data.id} title={productData.data.title} />
         </div>
       </div>
