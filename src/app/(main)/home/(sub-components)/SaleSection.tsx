@@ -26,7 +26,7 @@ const SaleSection = () => {
     <div className={`${poppins.className} mt-[32px] px-[16px] md:px-0 w-[95%] mx-auto`}>
       <div className={`flex flex-col md:flex-row items-start md:items-center gap-3 mb-5`}>
         <h1 className={`font-semibold text-h3 `}>Look what's on the markit!</h1>
-        <Link href={`/home`} className={`${hind.className} hover:underline text-sm font-light flex items-center`}>
+        <Link href={`/sale/all`} className={`${hind.className} hover:underline text-sm font-light flex items-center`}>
           <p>view more</p>
           <MdChevronRight fontSize={13} className={`mt-[2px]`} />
         </Link>
