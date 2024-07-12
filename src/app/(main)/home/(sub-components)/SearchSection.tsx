@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { IoChevronDown } from 'react-icons/io5';
-import { color } from 'framer-motion';
 
 enum FormType {
   SALE = 'Sale',
@@ -33,12 +32,16 @@ const SearchSection = () => {
             type='text'
             placeholder='What are you looking for...'
             onChange={(e) => setSearchInput(e.target.value)}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                return router.push(`/search?q=${searchInput}&cat=${formType}`);
+              }
+            }}
             className={`${poppins.className} w-full p-4 rounded text-dark2`}
           />
           <button
             onClick={() => {
-              const searchQuery = searchInput.split(' ').join('%20');
-              router.push(`/search?q=${searchQuery}&cat=${formType}`);
+              router.push(`/search?q=${searchInput}&cat=${formType}`);
             }}
             disabled={!searchInput}
             className={`w-[50px] h-[50px] bg-[#00000050] hover:bg-primary p-4 rounded-[50%] absolute right-[5px] bottom-[3px] flex justify-center items-center`}

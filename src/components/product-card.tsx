@@ -28,7 +28,9 @@ const ProductCard = ({ props }: { props: ProductCardProps }) => {
 
   return (
     <Link href={`/sale?id=${props.id}`}>
-      <Card className={`w-[300px] h-[400px] grid rounded bg-dark2 border-[1px] border-[#ffffff15]`}>
+      <Card
+        className={`w-[300px] h-[400px] grid rounded bg-dark2 border-[1px] border-[#ffffff15] hover:border-primary`}
+      >
         <CardHeader className={`w-full p-0`}>
           <AspectRatio ratio={16 / 12}>
             <Image

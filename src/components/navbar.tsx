@@ -45,9 +45,7 @@ const Navbar = async () => {
             <SheetHeader className={`text-left`}>
               <SheetTitle className={`flex flex-row items-center gap-4 md:flex-none`}>
                 <h1 className={`${poppins.className} text-primary font-semibold text-h3`}>Markit</h1>
-                <div className={`md:hidden`}>
-                  <Link href={`/signin`}>Sign in</Link> | <Link href={`/signup`}>Register</Link>
-                </div>
+                <div className={`md:hidden`}>{!data.user ? <Link href={`/signin`}>Sign in | Register</Link> : ''}</div>
               </SheetTitle>
             </SheetHeader>
             <div>
@@ -116,9 +114,7 @@ const Navbar = async () => {
                 )}
               </Accordion>
             </div>
-            <div className={`absolute bottom-[10px]`}>
-              <SignOutBtn />
-            </div>
+            <div className={`absolute bottom-[10px] md:hidden`}>{data.user ? <SignOutBtn /> : ''}</div>
           </SheetContent>
         </Sheet>
         <Link href={'/home'} className={`text-h3 text-primary font-semibold`}>
