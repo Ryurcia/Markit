@@ -8,6 +8,7 @@ const createBookmark = async (catType: string, searchParams: string, title: stri
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
   const { error } = await supabase
     .from('Bookmarks')
     .insert([{ link: bookmarkLink, user_id: user?.id, title: title, type: catType, item_id: searchParams }]);
