@@ -61,7 +61,7 @@ const page = () => {
                   </div>
                   <ErrorMessage name='email' render={(msg) => <div className={`text-accent2 text-sm`}>{msg}</div>} />
                   {authError ? <div className={`text-accent2`}>{authError}</div> : ''}
-                  <button type='submit' className={`${poppins.className} w-full border-2 py-[8px] hover:bg-primary`}>
+                  <button type='submit' className={`${poppins.className} w-full border-2 py-[8px]`}>
                     Sign in
                   </button>
                 </div>
