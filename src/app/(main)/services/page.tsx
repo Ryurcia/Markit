@@ -1,8 +1,24 @@
 import BookmarkButton from '@/components/bookmark-btn';
 import { getServiceData } from '@/lib/supabase/services/servicesFunctions';
+import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { poppins } from '@/utils/font.config';
+import ServiceEditForm from './(sub-components)/ServiceEditForm';
 
 const page = async ({ searchParams }: { searchParams: { id: string } }) => {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const currUserId = user ? user.id : '';
   const params = searchParams.id;
   const serviceData = await getServiceData(params);
 
@@ -23,7 +39,31 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
         </p>
       </div>
       <p>{serviceData.description}</p>
-      <div>
+      <div className={`flex gap-5`}>
+        {serviceData.post_author === currUserId ? (
+          <Dialog modal={false}>
+            <DialogTrigger className={`px-[25px] py-[8px] bg-primary text-neutral rounded`}>Edit</DialogTrigger>
+            <DialogContent className={`bg-dark rounded`}>
+              <DialogHeader>
+                <DialogTitle className={`text-h3 ${poppins.className}`}>Edit Post</DialogTitle>
+                <DialogDescription>Make changes to your post</DialogDescription>
+              </DialogHeader>
+              <ServiceEditForm
+                props={{
+                  service_id: serviceData.id,
+                  company_name: serviceData.company_name,
+                  title: serviceData.title,
+                  description: serviceData.description,
+                  price: serviceData.price,
+                  pay_by: serviceData.pay_by,
+                }}
+              />
+            </DialogContent>
+          </Dialog>
+        ) : (
+          <button className={`bg-primary py-[5px] px-[30px] rounded `}>Contact</button>
+        )}
+
         <h1 className={`font-semibold text-sub`}>
           ${serviceData.price} <span className={`text-sm italic`}>{serviceData.pay_by} payment</span>
         </h1>

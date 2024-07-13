@@ -82,8 +82,8 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
               <DialogTrigger className={`px-[25px] py-[8px] bg-primary text-neutral rounded`}>Edit</DialogTrigger>
               <DialogContent className={`bg-dark rounded`}>
                 <DialogHeader>
-                  <DialogTitle>Edit Post</DialogTitle>
-                  <DialogDescription>Edit your post</DialogDescription>
+                  <DialogTitle className={`text-h3 ${poppins.className}`}>Edit Post</DialogTitle>
+                  <DialogDescription>Make changes to your post</DialogDescription>
                 </DialogHeader>
                 <SaleEditForm
                   props={{
@@ -96,7 +96,7 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
               </DialogContent>
             </Dialog>
           ) : (
-            <button className={`bg-primary py-[5px] px-[30px] rounded `}>Claim</button>
+            <button className={`bg-primary py-[5px] px-[30px] rounded `}>Contact</button>
           )}
 
           <BookmarkButton catType={'sale'} id={productData.data.id} title={productData.data.title} />

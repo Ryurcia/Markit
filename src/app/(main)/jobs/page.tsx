@@ -4,10 +4,25 @@ import { getJobData } from '@/lib/supabase/jobs/jobFunctions';
 import { poppins } from '@/utils/font.config';
 import moment from 'moment';
 import Link from 'next/link';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { createClient } from '@/utils/supabase/server';
+import JobEditForm from './(sub-components)/JobEditForm';
 
 const page = async ({ searchParams }: { searchParams: { id: string } }) => {
   const params = searchParams.id;
   const jobData = await getJobData(params);
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const currUserId = user ? user.id : '';
 
   const requirements = jobData.requirements.split(',');
   return (
@@ -40,7 +55,31 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
       </div>
 
       <div>
-        <p>
+        {jobData.author_id === currUserId ? (
+          <Dialog modal={false}>
+            <DialogTrigger className={`px-[25px] py-[8px] bg-primary text-neutral rounded`}>Edit</DialogTrigger>
+            <DialogContent className={`bg-dark rounded`}>
+              <DialogHeader>
+                <DialogTitle className={`text-h3 ${poppins.className}`}>Edit Post</DialogTitle>
+                <DialogDescription>Make changes to your post</DialogDescription>
+              </DialogHeader>
+              <JobEditForm
+                props={{
+                  job_id: jobData.id,
+                  title: jobData.title,
+                  requirements: jobData.requirements,
+                  description: jobData.job_desc,
+                  company_name: jobData.company_name,
+                  pay: jobData.pay,
+                }}
+              />
+            </DialogContent>
+          </Dialog>
+        ) : (
+          <button className={`bg-primary py-[5px] px-[30px] rounded `}>Contact</button>
+        )}
+
+        <p className={`mt-5`}>
           Posted {moment(jobData.created_at).fromNow()} by{' '}
           <Link className={`underline`} href={`/profile?uid=${jobData.author_id}`}>
             {' '}
