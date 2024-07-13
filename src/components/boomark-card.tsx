@@ -28,13 +28,13 @@ const BookmarkCard = ({ props }: { props: BookmarkCardProps }) => {
         <DropdownMenuTrigger>
           <FiMoreVertical fontSize={25} />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className={` rounded border-2 border-dark bg-dark2`}>
+        <DropdownMenuContent className={` rounded border-2 border-dark bg-dark2 hover:bg-accent2`}>
           <DropdownMenuItem
             onClick={() => {
               deleteBookmark(props.bookmark_id);
               return router.refresh();
             }}
-            className={`cursor-pointer`}
+            className={`cursor-pointer hover:bg-accent2 hover:rounded`}
           >
             Delete
           </DropdownMenuItem>

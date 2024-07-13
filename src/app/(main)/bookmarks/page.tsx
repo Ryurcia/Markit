@@ -2,6 +2,7 @@ import { getUserBookmarks } from '@/lib/supabase/bookmarks/bookmarkFunctions';
 import { poppins } from '@/utils/font.config';
 import { createClient } from '@/utils/supabase/server';
 import BookmarkCard from '@/components/boomark-card';
+import Refresh from '@/components/ui/refresh';
 
 const page = async () => {
   const supabase = createClient();
@@ -15,7 +16,9 @@ const page = async () => {
 
   return (
     <div className={`w-full px-[16px] mt-4 md:w-[95%] md:px-0 md:mx-auto`}>
-      <h1 className={`text-h3 ${poppins.className} font-semibold`}>Bookmarks</h1>
+      <h1 className={`text-h3 ${poppins.className} font-semibold flex items-center gap-5`}>
+        Bookmarks <Refresh />
+      </h1>
       <div className={`mt-5 flex flex-col gap-3`}>
         {!bookmarks || bookmarks.length < 1 ? (
           <h1>No bookmarks</h1>
