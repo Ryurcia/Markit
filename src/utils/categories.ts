@@ -62,6 +62,10 @@ const JobsCat = [
     link: '/jobs/All',
   },
   {
+    title: 'Arts',
+    link: '/jobs/Arts',
+  },
+  {
     title: 'Sales',
     link: '/jobs/Sales',
   },
@@ -112,6 +116,10 @@ const JobsCat = [
   {
     title: 'Customer service',
     link: '/jobs/Customer service',
+  },
+  {
+    title: 'Film',
+    link: '/jobs/Film',
   },
 ];
 const ServicesCat = [
