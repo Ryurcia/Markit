@@ -35,7 +35,7 @@ const SaleEditForm = ({ props }: { props: EditFormProps }) => {
             .update([{ title: values.title, description: values.description, price: values.price }])
             .eq('id', props.product_id);
 
-          router.back();
+          router.replace('/home');
           return router.refresh();
         }}
       >
