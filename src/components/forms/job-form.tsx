@@ -71,6 +71,7 @@ const JobForm = () => {
               author_id: userId,
               author_username: username,
               requirements: values.requirements,
+              email: values.email,
             },
           ]);
 
