@@ -17,6 +17,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import SaleEditForm from './(sub-components)/SaleEditForm';
+import CommonProductList from './(sub-components)/CommonProductList';
 
 const page = async ({ searchParams }: { searchParams: { id: string } }) => {
   const supabase = createClient();
@@ -49,7 +50,7 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
     </div>
   ) : (
     <div
-      className={`p-[16px] md:p-0 md:w-[95%] md:mx-auto flex flex-col justify-center gap-5 lg:grid lg:grid-cols-2 lg:gap-5 items-center mt-[64px]`}
+      className={`p-[16px] md:p-0 md:w-[95%] md:mx-auto flex flex-col justify-center gap-5 lg:grid lg:grid-cols-2 lg:gap-5 items-center mt-5`}
     >
       {/* IMAGE */}
       <div className={`max-w-[700px] max-h-[700px] justify-self-center self-center lg:self-start`}>
@@ -101,6 +102,10 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
 
           <BookmarkButton catType={'sale'} id={productData.data.id} title={productData.data.title} />
         </div>
+      </div>
+      <div className={`col-span-2 pb-2`}>
+        <h1 className={`${poppins.className} text-h3 font-semibold mb-3`}>More Products like this</h1>
+        <CommonProductList keyword={productData.data.title} currProductId={productData.data.id}/>
       </div>
     </div>
   );

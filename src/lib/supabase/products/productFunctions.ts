@@ -34,4 +34,15 @@ const getAllProducts = async () => {
   return data;
 };
 
-export { getSaleProductsWithLimit, getProductsFromCategory, getAllProducts };
+const getCommonProducts = async(keywords:string,currProductId:string) => {
+  const supabase = createClient();
+  const { data } = await supabase.from('Sale_Post').select('*').textSearch('title',`${keywords}`);
+
+  if(!data) return []
+
+  return data.filter((res) => {
+    return res.id !== currProductId;
+  })
+}
+
+export { getSaleProductsWithLimit, getProductsFromCategory, getAllProducts, getCommonProducts };

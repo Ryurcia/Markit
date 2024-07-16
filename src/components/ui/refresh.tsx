@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 const Refresh = () => {
   const router = useRouter();
 
-  return <MdRefresh className={`cursor-pointer`} onClick={() => router.refresh()} fontSize={20} />;
+  return <MdRefresh className={`cursor-pointer hover:rotate-[90deg]`} onClick={() => router.refresh()} fontSize={20} />;
 };
 
 export default Refresh;
