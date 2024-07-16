@@ -119,8 +119,8 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
           <BookmarkButton catType={'sale'} id={productData.data.id} title={productData.data.title} />
         </div>
       </div>
-      <div className={`col-span-2 pb-2`}>
-        <h1 className={`${poppins.className} text-h3 font-semibold mb-3`}>More Products like this</h1>
+      <div className={`col-span-2 pb-2 mt-[32px]  md:px-0 w-[95%] mx-auto`}>
+        <h1 className={`${poppins.className} text-[18px] md:text-h3 font-semibold mb-3`}>More Products like this</h1>
         <CommonProductList keyword={productData.data.title} currProductId={productData.data.id} />
       </div>
     </div>

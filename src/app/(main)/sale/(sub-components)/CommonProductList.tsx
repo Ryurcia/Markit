@@ -5,12 +5,12 @@ import { getCommonProducts } from '@/lib/supabase/products/productFunctions';
 import { createClient } from '@/utils/supabase/server';
 import Autoplay from 'embla-carousel-autoplay';
 
-const CommonProductList = async ({ keyword, currProductId }: { keyword: string; currProductId:string }) => {
+const CommonProductList = async ({ keyword, currProductId }: { keyword: string; currProductId: string }) => {
   const supabase = createClient();
   const kwrds = keyword.split(' ');
   let keywordArray = [];
   let query = '';
-  
+
   for (let i = 0; i < kwrds.length; i++) {
     keywordArray.push(`'${kwrds[i]}'`);
   }
@@ -22,7 +22,7 @@ const CommonProductList = async ({ keyword, currProductId }: { keyword: string; 
   return products.length <= 0 ? (
     <div>No products like this.</div>
   ) : (
-    <div className={`w-full`}>
+    <div>
       <Carousel
         className={`w-full`}
         opts={{
