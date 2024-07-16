@@ -13,6 +13,7 @@ import { Separator } from '../ui/separator';
 
 const JobFormSchema = Yup.object().shape({
   title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
+  email: Yup.string().email().required('Email is required'),
   job_desc: Yup.string().max(250, 'Description is too long'),
   pay: Yup.number().required('Pay is required').typeError('Must be a number').max(500000, 'Max price exceeded'),
   company_name: Yup.string().max(50, 'Too Long'),
@@ -52,6 +53,7 @@ const JobForm = () => {
           title: '',
           job_desc: '',
           pay: '',
+          email: '',
           company_name: '',
           tag: JobsCat[1].title,
           requirements: '',
@@ -106,6 +108,25 @@ const JobForm = () => {
               <div>
                 <Field className={`text-dark p-[10px] rounded md:w-[300px]`} name='company_name' placeholder='Markit' />
                 <ErrorMessage name='company_name' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
+              </div>
+            </div>
+
+            <Separator className={`bg-dark h-[1px]`} />
+
+            <div className={`w-full flex flex-col justify-between md:flex-row items-start gap-5`}>
+              <div>
+                <label className={`${poppins.className} text-sub font-medium`} htmlFor='email'>
+                  Email for applicants
+                </label>
+                <p className={`text-sm opacity-50`}>Email where applicants can apply</p>
+              </div>
+              <div>
+                <Field
+                  className={`text-dark p-[10px] rounded md:w-[300px]`}
+                  name='email'
+                  placeholder='hireMe@company.com'
+                />
+                <ErrorMessage name='email' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
               </div>
             </div>
 

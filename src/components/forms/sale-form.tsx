@@ -15,7 +15,6 @@ const SaleFormSchema = Yup.object().shape({
   title: Yup.string().min(5, 'Title is too short').max(50, 'Title is too long').required('Title is required'),
   description: Yup.string().max(250, 'Description is too long'),
   price: Yup.number().required('Price is required').typeError('Must be a number').max(500000, 'Max price exceeded'),
-  email: Yup.string().email('Invalid email'),
   telNo: Yup.number().typeError('Must be a number').max(9990000000, 'Not a phone no'),
   condition: Yup.string(),
   tag: Yup.string(),
@@ -53,7 +52,6 @@ const SaleForm = () => {
           title: '',
           description: '',
           price: '',
-          email: '',
           tag: SalesCat[1].title,
           telNo: '',
           condition: 'New',
@@ -72,6 +70,7 @@ const SaleForm = () => {
                 condition: values.condition,
                 post_author: userId,
                 post_author_username: username,
+                tel_no: values.telNo,
               },
             ])
             .select('id');
@@ -140,16 +139,6 @@ const SaleForm = () => {
               </div>
               <div>
                 <div className={`grid gap-2`}>
-                  <div className={`grid grid-row-2`}>
-                    <label htmlFor='email'>Email</label>
-                    <Field
-                      className={`text-dark p-[10px] rounded  md:w-[300px]`}
-                      name='email'
-                      placeholder='johndoe@email.com'
-                    />
-                    <ErrorMessage name='email' render={(msg) => <p className={`text-accent2 text-sm`}>{msg}</p>} />
-                  </div>
-
                   <div className={`grid grid-row-2`}>
                     <label htmlFor='telNo'>Cell no.</label>
                     <Field

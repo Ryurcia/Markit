@@ -76,7 +76,19 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
             </DialogContent>
           </Dialog>
         ) : (
-          <button className={`bg-primary py-[5px] px-[30px] rounded `}>Contact</button>
+          <Dialog modal={false}>
+            <DialogTrigger className={`bg-primary py-[10px] px-[30px] rounded `}>Contact Info</DialogTrigger>
+            <DialogContent className={`bg-dark rounded`}>
+              <DialogHeader>
+                <DialogTitle className={`text-h3 ${poppins.className}`}>Contact Info</DialogTitle>
+                <DialogDescription>You can communicate your interest with provided info.</DialogDescription>
+              </DialogHeader>
+              <div>
+                <h1>Apply at</h1>
+                <p>{jobData.email}</p>
+              </div>
+            </DialogContent>
+          </Dialog>
         )}
 
         <p className={`mt-5`}>

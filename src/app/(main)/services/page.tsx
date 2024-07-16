@@ -61,7 +61,23 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
             </DialogContent>
           </Dialog>
         ) : (
-          <button className={`bg-primary py-[5px] px-[30px] rounded `}>Contact</button>
+          <Dialog modal={false}>
+            <DialogTrigger className={`bg-primary py-[5px] px-[30px] rounded `}>Contact Info</DialogTrigger>
+            <DialogContent className={`bg-dark rounded`}>
+              <DialogHeader>
+                <DialogTitle className={`text-h3 ${poppins.className}`}>Contact Info</DialogTitle>
+                <DialogDescription>You can reach the seller with provided info.</DialogDescription>
+              </DialogHeader>
+              <div>
+                <h1>Email:</h1>
+                <p>{serviceData.email}</p>
+              </div>
+              <div>
+                <h1>Tel no.</h1>
+                <p>{serviceData.tel_no ? serviceData.tel_no : 'N/A'}</p>
+              </div>
+            </DialogContent>
+          </Dialog>
         )}
 
         <h1 className={`font-semibold text-sub`}>

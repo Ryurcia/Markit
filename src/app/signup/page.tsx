@@ -50,9 +50,12 @@ const page = () => {
                 <div className='grid gap-4'>
                   <div className='grid grid-cols-2 gap-4'></div>
                   <div className='grid gap-2'>
-                    <label htmlFor='email' className={`${hind.className} text-base w-full`}>
-                      Email
-                    </label>
+                    <div>
+                      <label htmlFor='email' className={`${hind.className} text-base w-full`}>
+                        Email
+                      </label>
+                      <p className={`text-sm`}>*This will be used for people to contact you</p>
+                    </div>
                     <Field
                       className={`text-dark border-0 w-full p-[8px]`}
                       name='email'

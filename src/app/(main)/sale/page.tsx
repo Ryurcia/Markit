@@ -97,7 +97,23 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
               </DialogContent>
             </Dialog>
           ) : (
-            <button className={`bg-primary py-[5px] px-[30px] rounded `}>Contact</button>
+            <Dialog modal={false}>
+              <DialogTrigger className={`bg-primary py-[5px] px-[30px] rounded `}>Contact Info</DialogTrigger>
+              <DialogContent className={`bg-dark rounded`}>
+                <DialogHeader>
+                  <DialogTitle className={`text-h3 ${poppins.className}`}>Contact Info</DialogTitle>
+                  <DialogDescription>You can reach the seller with provided info.</DialogDescription>
+                </DialogHeader>
+                <div>
+                  <h1>Email:</h1>
+                  <p>{productData.data.post_author_email}</p>
+                </div>
+                <div>
+                  <h1>Tel no.</h1>
+                  <p>{productData.data.tel_no ? productData.data.tel_no : 'N/A'}</p>
+                </div>
+              </DialogContent>
+            </Dialog>
           )}
 
           <BookmarkButton catType={'sale'} id={productData.data.id} title={productData.data.title} />
@@ -105,7 +121,7 @@ const page = async ({ searchParams }: { searchParams: { id: string } }) => {
       </div>
       <div className={`col-span-2 pb-2`}>
         <h1 className={`${poppins.className} text-h3 font-semibold mb-3`}>More Products like this</h1>
-        <CommonProductList keyword={productData.data.title} currProductId={productData.data.id}/>
+        <CommonProductList keyword={productData.data.title} currProductId={productData.data.id} />
       </div>
     </div>
   );
